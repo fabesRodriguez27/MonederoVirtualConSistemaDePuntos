@@ -1,4 +1,4 @@
 package monedero.estructuras;
 
-public class ListaCircular {
+public class CircularList {
 }
