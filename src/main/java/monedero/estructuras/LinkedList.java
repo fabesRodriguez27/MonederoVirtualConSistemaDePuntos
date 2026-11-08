@@ -1,6 +1,7 @@
 package monedero.estructuras;
+import java.util.Iterator;
 
-public class LinkedList<T> {
+public class LinkedList<T> implements Iterable<T>{
 
     private Node<T> first;
     private Node<T> last;
@@ -30,6 +31,7 @@ public class LinkedList<T> {
         size++;
     }
 
+
     public boolean contains(T data) {  /// el nodo esta en la lista
         Node<T> current = first;
         while (current != null) {
@@ -41,6 +43,7 @@ public class LinkedList<T> {
         return false;
     }
 
+    //Buscar de acuerdo al indice
     public T get(int index) {  /// indice del nodo (recorre nodo por nodo O(n))
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
@@ -50,6 +53,18 @@ public class LinkedList<T> {
             current = current.getNext();
         }
         return current.getData();
+    }
+
+    //Buscar el elemento como tal
+    public T find(T data) {
+        Node<T> current = first;
+        while (current != null) {
+            if (current.getData().equals(data)) {
+                return current.getData();
+            }
+            current = current.getNext();
+        }
+        return null;
     }
 
     public boolean remove(T data) {  /// Eliminar
@@ -77,4 +92,27 @@ public class LinkedList<T> {
     public int getSize() { return size; } /// Tamaño
 
     public boolean isEmpty() { return size == 0; }  /// Esta vacia?
+
+    //La lista sabe cómo recorrerse
+    @Override
+    public Iterator<T> iterator() {
+        return new Recorrido();
+    }
+
+    private class Recorrido implements Iterator<T> {
+
+        private Node<T> current = first;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public T next() {
+            T data = current.getData();
+            current = current.getNext();
+            return data;
+        }
+    }
 }
