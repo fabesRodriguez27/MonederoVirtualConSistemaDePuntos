@@ -12,8 +12,8 @@ public class TransaccionProgramada extends Transaccion {
     private Frecuencia frecuencia;
     private boolean estado;
 
-    public TransaccionProgramada(String idCliente, TipoTransaccion tipoTransaccion, String origen, String destino, float monto, Categoria categoria, Frecuencia frecuencia) {
-        super(idCliente, tipoTransaccion, origen, destino, monto, categoria);
+    public TransaccionProgramada(TipoTransaccion tipoTransaccion, Monedero origen, Monedero destino, double monto, Categoria categoria, Frecuencia frecuencia) {
+        super(tipoTransaccion, origen, destino, monto, categoria);
         this.frecuencia = frecuencia;
         this.proximaEjecucion = calcularProximaEjecucion();
         this.estado = true;

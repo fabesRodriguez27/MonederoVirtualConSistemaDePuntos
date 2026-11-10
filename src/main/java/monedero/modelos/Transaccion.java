@@ -11,16 +11,16 @@ public class Transaccion {
     private String id;
     private String idCliente;
     private TipoTransaccion tipoTransaccion;
-    private String origen;
-    private String destino;
-    private float monto;
+    private Monedero origen;
+    private Monedero destino;
+    private double monto;
     private float comision;
     private LocalDateTime fecha;
     private int puntos;
     private Categoria categoria;
     private boolean revertida;
 
-    public Transaccion (String idCliente, TipoTransaccion tipoTransaccion, String origen, String destino, float monto, Categoria categoria) {
+    public Transaccion (TipoTransaccion tipoTransaccion, Monedero origen, Monedero destino, double monto, Categoria categoria) {
         this.id= UUID.randomUUID().toString();
         this.idCliente = idCliente;
         this.tipoTransaccion = tipoTransaccion;
@@ -58,23 +58,23 @@ public class Transaccion {
         this.tipoTransaccion = tipoTransaccion;
     }
 
-    public String getOrigen() {
+    public Monedero getOrigen() {
         return origen;
     }
 
-    public void setOrigen(String origen) {
+    public void setOrigen(Monedero origen) {
         this.origen = origen;
     }
 
-    public String getDestino() {
+    public Monedero getDestino() {
         return destino;
     }
 
-    public void setDestino(String destino) {
+    public void setDestino(Monedero destino) {
         this.destino = destino;
     }
 
-    public float getMonto() {
+    public double getMonto() {
         return monto;
     }
 
@@ -145,5 +145,22 @@ public class Transaccion {
 
     public void setRevertida(boolean revertida) {
         this.revertida = revertida;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaccion{" +
+                "id='" + id + '\'' +
+                ", idCliente='" + idCliente + '\'' +
+                ", tipoTransaccion=" + tipoTransaccion +
+                ", origen='" + origen + '\'' +
+                ", destino='" + destino + '\'' +
+                ", monto=" + monto +
+                ", comision=" + comision +
+                ", fecha=" + fecha +
+                ", puntos=" + puntos +
+                ", categoria=" + categoria +
+                ", revertida=" + revertida +
+                '}';
     }
 }
