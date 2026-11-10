@@ -1,5 +1,7 @@
 package monedero.servicios;
 import monedero.modelos.Cliente;
+import monedero.utilidades.Rango;
+
 import java.util.HashMap;
 
 public class ClienteService {
@@ -53,6 +55,10 @@ public class ClienteService {
             //Eliminar del Árbol
             return true;
         }
+    }
+
+    public Rango consultarRango(Cliente cliente) {
+        return cliente.getRango();
     }
 
     public boolean existeCliente(String idCliente) {

@@ -5,9 +5,9 @@ import java.util.Random;
 public class Monedero {
     private String id;
     private String nombre;
-    private float saldo;
+    private double saldo;
 
-    public Monedero(String nombre, float saldo) {
+    public Monedero(String nombre, double saldo) {
         this.id = generarNumeroMonedero();
         this.nombre = nombre;
         this.saldo = saldo;
@@ -35,11 +35,17 @@ public class Monedero {
         this.nombre = nombre;
     }
 
-    public float getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(float saldo) {
+    public void setSaldo(double saldo) {
         this.saldo = saldo;
+    }
+
+
+    @Override
+    public String toString() {
+        return nombre;
     }
 }

@@ -2,9 +2,11 @@ package monedero.modelos;
 import monedero.comparadores.ComparadorProximaEjecucion;
 import monedero.estructuras.LinkedList;
 import monedero.estructuras.PriorityQueue;
+import monedero.estructuras.Stack;
 import monedero.utilidades.Rango;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 public class Cliente {
     private String idCliente;
@@ -12,8 +14,11 @@ public class Cliente {
     private String nombre;
     private int puntos;
     private Rango rango;
+
     private LinkedList<Monedero> monederos;
     private PriorityQueue<TransaccionProgramada> transaccionesProgramadas;
+    private final LinkedList<Transaccion> historialTransacciones = new LinkedList<>(); // Historial de transacciones
+    private final Stack<Transaccion> transaccionesReversibles = new Stack<>(); // Pila de transacciones que se pueden revertir
 
     public Cliente(String idCliente, String password, String nombre) {
         this.idCliente = idCliente;
@@ -23,7 +28,7 @@ public class Cliente {
         this.rango = Rango.BRONCE; //Cuando Inicia No Tiene Puntos. Ya Luego se Recalcula
         this.monederos = new LinkedList<>();
         this.transaccionesProgramadas = new PriorityQueue<>(new ComparadorProximaEjecucion());
-        //Modero Principal
+        //Monedero Principal
         this.monederos.addLast(new Monedero("Principal", 0));
     }
 
@@ -80,5 +85,18 @@ public class Cliente {
     public PriorityQueue<TransaccionProgramada> getTransaccionesProgramadas() {
         return transaccionesProgramadas;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return puntos == cliente.puntos && Objects.equals(idCliente, cliente.idCliente) && Objects.equals(password, cliente.password) && Objects.equals(nombre, cliente.nombre) && rango == cliente.rango && Objects.equals(monederos, cliente.monederos) && Objects.equals(transaccionesProgramadas, cliente.transaccionesProgramadas);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idCliente, password, nombre, puntos, rango, monederos, transaccionesProgramadas);
+    }
+
 
 }
