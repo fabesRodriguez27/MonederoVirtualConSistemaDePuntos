@@ -4,11 +4,11 @@ public class TarifaService {
     private static float tarifaRetiro;
     private static float tarifaTransferencia;
 
-    public TarifaService(float tarifaRetiro, float tarifaTransferencia) {
-        actualizarTarifas(tarifaRetiro, tarifaTransferencia);
+    public TarifaService() {
     }
 
     public boolean actualizarTarifas(float retiro, float transferencia) {
+        if (!Float.isFinite(retiro) || !Float.isFinite(transferencia) || retiro < 0 || transferencia < 0) return false;
         tarifaRetiro = retiro;
         tarifaTransferencia = transferencia;
         return true;

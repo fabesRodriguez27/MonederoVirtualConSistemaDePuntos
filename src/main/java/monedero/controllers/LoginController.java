@@ -10,12 +10,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import monedero.application.SessionManager;
-import monedero.application.Sistema;
-import monedero.modelos.Cliente;
-import monedero.servicios.ClienteService;
+import monedero.modelos.SessionManager;
+import monedero.modelos.Usuario;
+import monedero.servicios.facade.LoginFacade;
 import monedero.utilidades.PathsFxml;
 import javafx.scene.input.MouseEvent;
+import monedero.utilidades.Rol;
 
 public class LoginController implements Initializable {
 
@@ -27,7 +27,14 @@ public class LoginController implements Initializable {
     private TextField inputUsername;
     @FXML
     private Label lblMensajeError;
-    private ClienteService clienteService;
+    private LoginFacade loginFacade;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        loginFacade=new LoginFacade();
+        inputUsername.clear();
+        inputPassword.clear();
+    }
 
     @FXML
     void login(ActionEvent event) {
@@ -39,11 +46,14 @@ public class LoginController implements Initializable {
                 mostrarError("Por Favor Ingrese su Usuario y Contraseña");
                 return;
             }
-            Cliente cliente = clienteService.validarIngreso(id, password);
-            if (cliente != null) {
-                SessionManager.getInstancia().iniciarSesion(cliente);
+            Usuario usuario = loginFacade.validarIngreso(id, password);
+
+            if (usuario.getRol()== Rol.USUARIO) {
+                SessionManager.getInstancia().iniciarSesion(loginFacade.retornarCliente(usuario.getId()));
                 navegarAPantalla(event, PathsFxml.PATH_PANTALLA_PRINCIPAL_CLIENTE);
-            }else {
+            }else if (usuario.getRol()==Rol.ADMINISTRADOR) {
+                navegarAPantalla(event, PathsFxml.PATH_PANTALLA_PANEL_CONTROL);
+            }else{
                 mostrarError("Credenciales Inválidas. Verifique Su ID y Contraseña.");
                 inputPassword.clear();
                 inputUsername.clear();
@@ -103,12 +113,5 @@ public class LoginController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        clienteService = Sistema.getInstancia().getClienteService();
-        inputUsername.clear();
-        inputPassword.clear();
     }
 }

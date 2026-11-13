@@ -1,38 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane prefHeight="456.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="monedero.controllers.LoginController">
+<AnchorPane minHeight="580.0" minWidth="420.0" prefHeight="620.0" prefWidth="720.0" style="-fx-background-color: #F1F5F9; -fx-font-family: 'System';" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="monedero.controllers.LoginController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d1d1d1" height="287.0" layoutX="143.0" layoutY="76.0" stroke="#262121" strokeType="INSIDE" width="297.0" />
-      <Label layoutX="253.0" layoutY="96.0" text="LOGIN" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
-         <font>
-            <Font name="System Bold" size="25.0" />
-         </font>
-      </Label>
-      <Text layoutX="202.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" />
-      <TextField fx:id="inputUsername" layoutX="202.0" layoutY="169.0" prefHeight="26.0" prefWidth="180.0" />
-      <Text layoutX="202.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" />
-      <PasswordField fx:id="inputPassword" layoutX="202.0" layoutY="238.0" prefHeight="26.0" prefWidth="180.0" />
-      <Button fx:id="btnLogin" layoutX="202.0" layoutY="275.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="180.0" text="Ingresar" textFill="#101010" />
-      <Label layoutX="201.0" layoutY="312.0" text="¿No tienes una cuenta?">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Label>
-      <Label layoutX="331.0" layoutY="312.0" onMouseClicked="#registrarUsuario" text="Registrate">
-         <font>
-            <Font name="System Bold" size="10.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblMensajeError" layoutX="147.0" layoutY="387.0" prefHeight="18.0" prefWidth="290.0" />
+      <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <padding><Insets bottom="24.0" left="24.0" right="24.0" top="24.0" /></padding>
+         <children>
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="350.0" spacing="24.0">
+               <children>
+                  <VBox alignment="CENTER" spacing="6.0">
+                     <children>
+                        <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #0F172A;" text="Monedero Virtual" />
+                        <Label style="-fx-font-size: 14px; -fx-text-fill: #64748B;" text="Tu dinero y tus puntos" />
+                     </children>
+                  </VBox>
+                  <VBox fillWidth="true" spacing="12.0" style="-fx-background-color: white; -fx-background-radius: 18; -fx-effect: dropshadow(gaussian, rgba(15,23,42,0.10), 24, 0, 0, 8);">
+                     <padding><Insets bottom="28.0" left="28.0" right="28.0" top="28.0" /></padding>
+                     <children>
+                        <Label style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #0F172A;" text="Iniciar sesión" />
+                        <Label style="-fx-font-size: 13px; -fx-text-fill: #64748B;" text="Ingrese sus datos para continuar.">
+                           <VBox.margin><Insets bottom="8.0" /></VBox.margin>
+                        </Label>
+                        <VBox spacing="7.0">
+                           <children>
+                              <Label style="-fx-font-size: 14px; -fx-text-fill: #334155;" text="ID" />
+                              <TextField fx:id="inputUsername" minHeight="42.0" prefHeight="42.0" promptText="Ingrese su ID" style="-fx-font-size: 14px; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CBD5E1; -fx-padding: 10 12;" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="7.0">
+                           <children>
+                              <Label style="-fx-font-size: 14px; -fx-text-fill: #334155;" text="Contraseña" />
+                              <PasswordField fx:id="inputPassword" minHeight="42.0" prefHeight="42.0" promptText="Ingresa tu contraseña" style="-fx-font-size: 14px; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CBD5E1; -fx-padding: 10 12;" />
+                           </children>
+                        </VBox>
+                        <Label fx:id="lblMensajeError" maxWidth="Infinity" minHeight="34.0" style="-fx-font-size: 12px; -fx-text-fill: #B91C1C;" text="" wrapText="true" />
+                        <Button fx:id="btnLogin" defaultButton="true" maxWidth="Infinity" minHeight="44.0" mnemonicParsing="false" onAction="#login" prefHeight="44.0" style="-fx-background-color: #0F766E; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand;" text="Ingresar" />
+                        <HBox alignment="CENTER" spacing="5.0">
+                           <VBox.margin><Insets top="6.0" /></VBox.margin>
+                           <children>
+                              <Label style="-fx-font-size: 13px; -fx-text-fill: #64748B;" text="¿No tienes cuenta?" />
+                              <Label onMouseClicked="#registrarUsuario" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #0F766E; -fx-cursor: hand;" text="Regístrate" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

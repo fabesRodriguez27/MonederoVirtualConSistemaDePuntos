@@ -112,4 +112,9 @@ public class TransaccionService {
     public boolean verificarIntegridadHistorial(String idCliente) {
         return false;
     }
+
+    public LinkedList<Transaccion> obtenerHistorialPorMonto() {
+        return historialTransacciones.inOrden();
+    }
+
 }

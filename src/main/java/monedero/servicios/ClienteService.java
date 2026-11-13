@@ -1,5 +1,8 @@
 package monedero.servicios;
+import monedero.application.MonederoVirtual;
+import monedero.estructuras.LinkedList;
 import monedero.modelos.Cliente;
+import monedero.modelos.Monedero;
 import monedero.utilidades.Rango;
 
 import java.util.HashMap;
@@ -21,38 +24,25 @@ public class ClienteService {
         return c;
     }
 
-    public boolean registrarCliente(String idCliente, String password, String nombre) {
+    public boolean registrarCliente(String idCliente, String nombre) {
         if (clientes.containsKey(idCliente)) {
             return false;                          // ya existe ese usuario
         }
-        Cliente clienteNuevo = new Cliente(idCliente, password, nombre);
+        Cliente clienteNuevo = new Cliente(idCliente, nombre);
         clientes.put(idCliente, clienteNuevo);
-        //Aquí se Registra También en el Árbol creo
+        MonederoVirtual.getInstancia().getPuntosService().registrarCliente(clienteNuevo);
         return true;
     }
 
-    public Cliente validarIngreso(String idCliente, String passwordCliente) {
-        Cliente clienteHallado = clientes.get(idCliente);
-        if (clienteHallado != null && clienteHallado.getPassword().equals(passwordCliente)) {
-            System.out.println("Cliente Hallado y Clave Correcta");
-            return clienteHallado;
-        }else{
-            System.out.println("Credenciales Invalidas");
-            return null;
-        }
-    }
-
-    //No Creo que se Deba de Eliminar (es más una función del Admin) pero se crea
     public boolean eliminarCliente(String idCliente){
         Cliente clienteHallado = clientes.get(idCliente);
         if(clienteHallado == null){
-
             return false;
-        }else if(clienteHallado.getSaldoTotal() > 0 || !clienteHallado.getTransaccionesProgramadas().isEmpty()){
+        }else if(!clienteHallado.getTransaccionesProgramadas().isEmpty()){
             return false;
         }else{
             clientes.remove(idCliente);
-            //Eliminar del Árbol
+            MonederoVirtual.getInstancia().getPuntosService().eliminarCliente(clienteHallado);
             return true;
         }
     }
@@ -65,9 +55,31 @@ public class ClienteService {
         return clientes.get(idCliente) != null;
     }
 
-    public HashMap<String, Cliente> obtenerClientes() {
-        return clientes;
+    public LinkedList<Cliente> obtenerListaClientes() {
+        LinkedList<Cliente> resultado = new LinkedList<>();
+        for (Cliente cliente : clientes.values()) {
+            resultado.addLast(cliente);
+        }
+        return resultado;
     }
 
+    public boolean crearMonedero(String idCliente, String nombre, double saldo) {
+        Cliente cliente = buscarCliente(idCliente);
+        if (nombre == null || nombre.isBlank()) {
+            throw new IllegalArgumentException("Escribe un nombre para el monedero.");
+        }
+        return cliente.addMonedero(new Monedero(nombre.trim(), saldo));
+    }
 
+    public boolean eliminarMonedero(String idCliente, String idMonedero) {
+        return buscarCliente(idCliente).eliminarMonedero(idMonedero);
+    }
+
+    public LinkedList<Monedero> obtenerMonederos(String idCliente) {
+        LinkedList<Monedero> resultado = new LinkedList<>();
+        for (Monedero monedero : buscarCliente(idCliente).getMonederos()) {
+            resultado.addLast(monedero);
+        }
+        return resultado;
+    }
 }

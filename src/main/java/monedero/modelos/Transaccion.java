@@ -110,13 +110,13 @@ public class Transaccion {
 
         switch (tipoTransaccion) {
             case DEPOSITO:
-                return (int) (this.monto/100);
+                return (int) (this.monto/1000);
 
             case RETIRO:
-                return (int) (this.monto/100)*2;
+                return (int) (this.monto/1000)*2;
 
             case TRANSFERENCIA:
-                return (int) (this.monto/100)*3;
+                return (int) (this.monto/1000)*3;
 
             default:
                 return 0;

@@ -237,16 +237,17 @@ public class AVLTree<T> {
 
     // RECORRIDOS
 
-    public void inOrden() {
-        inOrden(root);
-        System.out.println();
+    public LinkedList<T> inOrden() {
+        LinkedList<T> elementos = new LinkedList<>();
+        inOrden(root,elementos);
+        return elementos;
     }
 
-    private void inOrden(TreeNode<T> rootAux) {
+    private void inOrden(TreeNode<T> rootAux,LinkedList<T> elementos) {
         if (rootAux == null) return;
-        inOrden(rootAux.getLeftChild());
-        System.out.print(rootAux.getElement() + " (FE: " + getFE(rootAux) + ") ");
-        inOrden(rootAux.getRightChild());
+        inOrden(rootAux.getLeftChild(),elementos);
+        elementos.addLast(rootAux.getElement());
+        inOrden(rootAux.getRightChild(),elementos);
     }
 
     public void preOrden() {

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane minHeight="740" minWidth="960" prefHeight="860" prefWidth="1180" style="-fx-background-color: #F1F5F9; -fx-font-family: 'System'; -fx-accent: #0F766E; -fx-focus-color: #0F766E; -fx-faint-focus-color: #0F766E22;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="monedero.controllers.PanelControlController">
+ <children>
+  <VBox spacing="20" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+   <padding><Insets bottom="28" left="28" right="28" top="28" /></padding>
+   <children>
+    <HBox alignment="CENTER_LEFT" spacing="16">
+     <children>
+      <VBox spacing="4"><children><Label style="-fx-font-size: 20px; -fx-text-fill: #0F172A; -fx-font-weight: bold;" text="Monedero Virtual" wrapText="true" /><Label style="-fx-font-size: 13px; -fx-text-fill: #64748B;" text="Administración de la plataforma" wrapText="true" /></children></VBox>
+      <Region HBox.hgrow="ALWAYS" />
+      <Label style="-fx-background-color: #CCFBF1; -fx-text-fill: #0F766E; -fx-background-radius: 20; -fx-padding: 8 14; -fx-font-size: 11px; -fx-font-weight: bold;" text="ADMINISTRADOR" />
+     </children>
+    </HBox>
+    <VBox spacing="5" style="-fx-background-color: #0F766E; -fx-background-radius: 16;">
+     <padding><Insets bottom="22" left="22" right="22" top="22" /></padding><children><Label style="-fx-font-size: 28px; -fx-text-fill: white; -fx-font-weight: bold;" text="Panel de control" wrapText="true" /><Label style="-fx-font-size: 14px; -fx-text-fill: #CCFBF1;" text="Consulta los clientes, sus puntos y el historial de transacciones." wrapText="true" /></children>
+    </VBox>
+    <HBox minHeight="290" prefHeight="340" spacing="20" VBox.vgrow="ALWAYS">
+     <children>
+      <VBox minWidth="0" prefWidth="552" spacing="12" style="-fx-background-color: white; -fx-background-radius: 18; -fx-effect: dropshadow(gaussian, rgba(15,23,42,0.08), 20, 0, 0, 6);" HBox.hgrow="ALWAYS">
+       <padding><Insets bottom="20" left="20" right="20" top="20" /></padding><children>
+        <HBox alignment="CENTER_LEFT" spacing="8"><Label style="-fx-font-size: 18px; -fx-text-fill: #0F172A; -fx-font-weight: bold;" text="Clientes registrados" wrapText="true" /><Region HBox.hgrow="ALWAYS" /><Button fx:id="btnEliminarCliente" maxWidth="Infinity" onAction="#eliminarSeleccionado" style="-fx-background-color: #E6F5F2; -fx-text-fill: #0F625D; -fx-padding: 8 12; -fx-background-radius: 8;" text="Eliminar cliente" /></HBox>
+        <TableView fx:id="tablaClientes" fixedCellSize="36" minHeight="150" prefHeight="210" style="-fx-background-color: white; -fx-border-color: #E2E8F0; -fx-border-radius: 8; -fx-font-size: 13px;" VBox.vgrow="ALWAYS">
+ <columns><TableColumn fx:id="colIdCliente" prefWidth="120" sortable="false" text="Cédula" />
+<TableColumn fx:id="colNombreCliente" prefWidth="230" sortable="false" text="Nombre" />
+<TableColumn fx:id="colRangoCliente" prefWidth="120" sortable="false" text="Rango" /></columns><placeholder><Label style="-fx-font-size: 13px; -fx-text-fill: #64748B;" text="Los clientes registrados aparecerán aquí." wrapText="true" /></placeholder>
+ </TableView>
+        <HBox alignment="CENTER_LEFT" spacing="12"><children>
+         <Label style="-fx-font-size: 12px; -fx-text-fill: #334155;" text="Monederos del cliente" wrapText="true" />
+         <ComboBox fx:id="comboMonederosCliente" maxWidth="Infinity" minWidth="120" prefHeight="38" prefWidth="270" promptText="Selecciona un cliente" style="-fx-background-color: #F8FAFC; -fx-background-radius: 8; -fx-border-color: #CBD5E1; -fx-border-radius: 8; -fx-font-size: 13px;" HBox.hgrow="ALWAYS" />
+        </children></HBox>
+       </children>
+      </VBox>
+      <VBox fx:id="cerrarSesion" minWidth="0" prefWidth="552" spacing="12" style="-fx-background-color: white; -fx-background-radius: 18; -fx-effect: dropshadow(gaussian, rgba(15,23,42,0.08), 20, 0, 0, 6);" HBox.hgrow="ALWAYS">
+       <padding><Insets bottom="20" left="20" right="20" top="20" /></padding><children><Label style="-fx-font-size: 18px; -fx-text-fill: #0F172A; -fx-font-weight: bold;" text="Clientes por puntos" wrapText="true" /><TableView fx:id="tablaClientesPorPuntos" fixedCellSize="36" minHeight="150" prefHeight="210" style="-fx-background-color: white; -fx-border-color: #E2E8F0; -fx-border-radius: 8; -fx-font-size: 13px;" VBox.vgrow="ALWAYS">
+ <columns><TableColumn fx:id="colIdClientePuntos" prefWidth="100" sortable="false" text="Cédula" />
+<TableColumn fx:id="colNombreClientePuntos" prefWidth="170" sortable="false" text="Nombre" />
+<TableColumn fx:id="colPuntosCliente" prefWidth="90" sortable="false" text="Puntos" />
+<TableColumn fx:id="colRangoClientePuntos" prefWidth="110" sortable="false" text="Rango" /></columns><placeholder><Label style="-fx-font-size: 13px; -fx-text-fill: #64748B;" text="Los clientes aparecerán ordenados por puntos." wrapText="true" /></placeholder>
+ </TableView><Label style="-fx-font-size: 12px; -fx-text-fill: #64748B;" text="Consulta los puntos acumulados y el rango de cada cliente." wrapText="true" /></children>
+      </VBox>
+     </children>
+    </HBox>
+    <HBox spacing="16" VBox.vgrow="ALWAYS"><VBox minHeight="230" minWidth="0" prefHeight="270" spacing="12" style="-fx-background-color: white; -fx-background-radius: 18; -fx-effect: dropshadow(gaussian, rgba(15,23,42,0.08), 20, 0, 0, 6);" HBox.hgrow="ALWAYS">
+     <padding><Insets bottom="20" left="20" right="20" top="20" /></padding><children>
+      <HBox alignment="CENTER_LEFT" spacing="16"><children><Label style="-fx-font-size: 18px; -fx-text-fill: #0F172A; -fx-font-weight: bold;" text="Historial de transacciones" wrapText="true" /><Region HBox.hgrow="ALWAYS" /><Label style="-fx-font-size: 12px; -fx-text-fill: #0F766E; -fx-font-weight: bold;" text="Monto: menor a mayor" wrapText="true" /></children></HBox>
+      <TableView fx:id="tablaHistorialTransacciones" fixedCellSize="36" minHeight="150" prefHeight="210" style="-fx-background-color: white; -fx-border-color: #E2E8F0; -fx-border-radius: 8; -fx-font-size: 13px;" VBox.vgrow="ALWAYS">
+ <columns><TableColumn fx:id="colIdTransaccion" prefWidth="150" sortable="false" text="ID transacción" />
+<TableColumn fx:id="colClienteTransaccion" prefWidth="120" sortable="false" text="Cédula" />
+<TableColumn fx:id="colTipoTransaccion" prefWidth="130" sortable="false" text="Tipo" />
+<TableColumn fx:id="colMontoTransaccion" prefWidth="120" sortable="false" text="Monto" />
+<TableColumn fx:id="colFechaTransaccion" prefWidth="170" sortable="false" text="Fecha" />
+<TableColumn fx:id="colOrigenTransaccion" prefWidth="150" sortable="false" text="Origen" />
+<TableColumn fx:id="colDestinoTransaccion" prefWidth="150" sortable="false" text="Destino" /></columns><placeholder><Label style="-fx-font-size: 13px; -fx-text-fill: #64748B;" text="El historial de transacciones aparecerá aquí." wrapText="true" /></placeholder>
+ </TableView>
+     </children>
+    </VBox><VBox alignment="CENTER" maxWidth="180" minWidth="180" prefWidth="180" spacing="12" style="-fx-background-color: white; -fx-background-radius: 18; -fx-padding: 12;"><Button maxWidth="Infinity" onAction="#abrirTarifas" style="-fx-background-color: #E6F5F2; -fx-text-fill: #0F625D; -fx-padding: 8 12; -fx-background-radius: 8;" text="Gestión de tarifas" /><Button maxWidth="Infinity" onAction="#abrirInformes" style="-fx-background-color: #E6F5F2; -fx-text-fill: #0F625D; -fx-padding: 8 12; -fx-background-radius: 8;" text="Informes avanzados" /><Button maxWidth="Infinity" onAction="#cerrarSesion" style="-fx-background-color: #E6F5F2; -fx-text-fill: #0F625D; -fx-padding: 8 12; -fx-background-radius: 8;" text="Cerrar Sesion Admin" /></VBox></HBox>
+   </children>
+  </VBox>
+ </children>
+</AnchorPane>

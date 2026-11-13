@@ -1,5 +1,4 @@
-package monedero.application;
-import monedero.modelos.Cliente;
+package monedero.modelos;
 
 public class SessionManager {
     private static SessionManager instancia;
@@ -21,8 +20,11 @@ public class SessionManager {
     }
 
     public void cerrarSesion() {
-        System.out.println("Cerrando Sesión para Cliente: " + clienteLogueado.getIdCliente());
-        this.clienteLogueado = null;
+        if (clienteLogueado != null) {
+            System.out.println("Cerrando sesión para cliente: "
+                    + clienteLogueado.getIdCliente());
+        }
+        clienteLogueado = null;
     }
 
     public Cliente getClienteLogueado() {

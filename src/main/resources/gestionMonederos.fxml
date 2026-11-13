@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<VBox xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="monedero.controllers.MonederosTransferenciasController" spacing="20" prefWidth="660" style="-fx-background-color: #F1F5F9; -fx-padding: 28; -fx-font-family: System;">
+    <Label text="Gestión de monederos y programadas" maxWidth="Infinity" style="-fx-background-color: #0F766E; -fx-background-radius: 16; -fx-text-fill: white; -fx-padding: 18; -fx-font-size: 23px; -fx-font-weight: bold;"/>
+    <VBox spacing="12" style="-fx-padding: 18; -fx-background-color: white; -fx-background-radius: 16;">
+        <Label text="Gestión de monederos" style="-fx-font-weight: bold; -fx-font-size: 17px; -fx-text-fill: #0F172A;"/>
+        <HBox spacing="12">
+            <VBox spacing="4" HBox.hgrow="ALWAYS"><Label text="Nombre"/><TextField fx:id="nombre" promptText="Ej. Ahorros"/></VBox>
+            <VBox spacing="4" HBox.hgrow="ALWAYS"><Label text="Saldo inicial (pesos)"/><TextField fx:id="saldo" promptText="Ej. 30000 o 30000,50"/></VBox>
+        </HBox>
+        <Button text="Crear monedero" onAction="#crearMonedero" maxWidth="Infinity" alignment="CENTER_LEFT" style="-fx-background-color: #F0FDFA; -fx-text-fill: #115E59; -fx-padding: 12 16; -fx-border-color: #CCFBF1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-cursor: hand;"/>
+        <Label text="Monedero a eliminar"/>
+        <ComboBox fx:id="seleccion" maxWidth="Infinity" promptText="Selecciona un monedero secundario"/>
+        <Button fx:id="eliminar" text="Eliminar monedero" onAction="#eliminarMonedero" maxWidth="Infinity" alignment="CENTER_LEFT" style="-fx-background-color: #F0FDFA; -fx-text-fill: #115E59; -fx-padding: 12 16; -fx-border-color: #CCFBF1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-cursor: hand;"/>
+        <Label fx:id="mensaje" wrapText="true"/>
+    </VBox>
+    <VBox spacing="12" style="-fx-padding: 18; -fx-background-color: white; -fx-background-radius: 16;">
+        <Label text="Gestión de transacciones programadas" style="-fx-font-weight: bold; -fx-font-size: 17px; -fx-text-fill: #0F172A;"/>
+        <Button text="Programar nueva transacción" onAction="#programarTransaccion" maxWidth="Infinity" alignment="CENTER_LEFT" style="-fx-background-color: #F0FDFA; -fx-text-fill: #115E59; -fx-padding: 12 16; -fx-border-color: #CCFBF1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-cursor: hand;"/>
+        <Button text="Eliminar transacción programada" onAction="#eliminarProgramada" maxWidth="Infinity" alignment="CENTER_LEFT" style="-fx-background-color: #F0FDFA; -fx-text-fill: #115E59; -fx-padding: 12 16; -fx-border-color: #CCFBF1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-cursor: hand;"/>
+    </VBox>
+    <Button text="Volver" onAction="#volver" style="-fx-background-color: #0F766E; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 14; -fx-background-radius: 8; -fx-cursor: hand;"/>
+</VBox>

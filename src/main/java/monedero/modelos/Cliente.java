@@ -10,7 +10,6 @@ import java.util.Objects;
 
 public class Cliente {
     private String idCliente;
-    private String password;
     private String nombre;
     private int puntos;
     private Rango rango;
@@ -20,9 +19,8 @@ public class Cliente {
     private final LinkedList<Transaccion> historialTransacciones = new LinkedList<>(); // Historial de transacciones
     private final Stack<Transaccion> transaccionesReversibles = new Stack<>(); // Pila de transacciones que se pueden revertir
 
-    public Cliente(String idCliente, String password, String nombre) {
+    public Cliente(String idCliente, String nombre) {
         this.idCliente = idCliente;
-        this.password = password;
         this.nombre = nombre;
         this.puntos = 0;
         this.rango = Rango.BRONCE; //Cuando Inicia No Tiene Puntos. Ya Luego se Recalcula
@@ -34,14 +32,6 @@ public class Cliente {
 
     public String getIdCliente() {
         return idCliente;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getNombre() {
@@ -72,6 +62,47 @@ public class Cliente {
         return monederos;
     }
 
+    public boolean addMonedero(Monedero monedero) {
+        Monedero principal = monederos.get(0);
+        double saldoInicial = monedero.getSaldo();
+
+        if (!Double.isFinite(saldoInicial) || saldoInicial < 0) {
+            throw new IllegalArgumentException("El saldo inicial debe ser válido y no negativo.");
+        }
+
+        if (saldoInicial > principal.getSaldo()) {
+            throw new IllegalArgumentException("Saldo insuficiente en el monedero principal.");
+        }
+
+        monederos.addLast(monedero);
+        principal.setSaldo(principal.getSaldo() - saldoInicial);
+        return true;
+    }
+
+    public boolean eliminarMonedero(String idMonedero) {
+        Monedero principal = monederos.get(0);
+
+        if (principal.getId().equals(idMonedero)) {
+            throw new IllegalArgumentException("No se puede eliminar el monedero principal.");
+        }
+
+        Monedero encontrado = null;
+        for (Monedero actual : monederos) {
+            if (actual.getId().equals(idMonedero)) {
+                encontrado = actual;
+                break;
+            }
+        }
+
+        if (encontrado == null || !monederos.remove(encontrado)) {
+            return false;
+        }
+
+        principal.setSaldo(principal.getSaldo() + encontrado.getSaldo());
+        encontrado.setSaldo(0);
+        return true;
+    }
+
     public double getSaldoTotal() {
         double total = 0;
         Iterator<Monedero> iterador = monederos.iterator();
@@ -82,20 +113,29 @@ public class Cliente {
         return total;
     }
 
+    public double getSaldoMonederoPrincipal(){
+        return monederos.get(0).getSaldo();
+    }
+
+    public LinkedList<Transaccion> getHistorialTransacciones(){
+        return historialTransacciones;
+    }
+
     public PriorityQueue<TransaccionProgramada> getTransaccionesProgramadas() {
         return transaccionesProgramadas;
     }
+
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return puntos == cliente.puntos && Objects.equals(idCliente, cliente.idCliente) && Objects.equals(password, cliente.password) && Objects.equals(nombre, cliente.nombre) && rango == cliente.rango && Objects.equals(monederos, cliente.monederos) && Objects.equals(transaccionesProgramadas, cliente.transaccionesProgramadas);
+        return puntos == cliente.puntos && Objects.equals(idCliente, cliente.idCliente) && Objects.equals(nombre, cliente.nombre) && rango == cliente.rango && Objects.equals(monederos, cliente.monederos) && Objects.equals(transaccionesProgramadas, cliente.transaccionesProgramadas);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idCliente, password, nombre, puntos, rango, monederos, transaccionesProgramadas);
+        return Objects.hash(idCliente, nombre, puntos, rango, monederos, transaccionesProgramadas);
     }
 
 

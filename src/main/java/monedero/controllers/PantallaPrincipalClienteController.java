@@ -20,12 +20,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
-import monedero.application.SessionManager;
-import monedero.application.Sistema;
+import monedero.modelos.SessionManager;
 import monedero.modelos.Cliente;
+import monedero.modelos.Transaccion;
+import java.util.function.Function;
 import monedero.modelos.Monedero;
+import monedero.application.MonederoVirtual;
 import monedero.servicios.TransaccionService;
-import monedero.utilidades.Categoria;
+import monedero.servicios.facade.ClienteFacade;
+import monedero.utilidades.FormatoCedula;
 import monedero.utilidades.PathsFxml;
 
 public class PantallaPrincipalClienteController {
@@ -57,6 +60,17 @@ public class PantallaPrincipalClienteController {
     @FXML
     private TableColumn<Monedero, String> colSaldoMonedero;
 
+    @FXML private TableView<Transaccion> tablaHistorialCliente;
+    @FXML private TableColumn<Transaccion, String> id;
+    @FXML private TableColumn<Transaccion, String> tipo;
+    @FXML private TableColumn<Transaccion, String> origen;
+    @FXML private TableColumn<Transaccion, String> destino;
+    @FXML private TableColumn<Transaccion, String> comision;
+    @FXML private TableColumn<Transaccion, String> puntos;
+    @FXML private TableColumn<Transaccion, String> estado;
+
+    private final ClienteFacade clienteFacade = new ClienteFacade();
+
     private Cliente cliente;
 
     private TransaccionService transaccionService;
@@ -77,8 +91,9 @@ public class PantallaPrincipalClienteController {
         }
 
         // Obtener el servicio de transacciones desde Sistema
-        transaccionService = Sistema.getInstancia().getTransaccionService();
+        transaccionService = MonederoVirtual.getInstancia().getTransaccionService();
 
+        cargarHistorial();
         cargarInfoCliente();
         cargarMonederos();
     }
@@ -90,7 +105,7 @@ public class PantallaPrincipalClienteController {
 
         nombreClientelbl.setText(cliente.getNombre());
 
-        idClientelbl.setText(cliente.getIdCliente());
+        idClientelbl.setText(FormatoCedula.mostrar(cliente.getIdCliente()));
 
         puntosAcumuladoslbl.setText(
                 String.valueOf(cliente.getPuntos())
@@ -144,6 +159,24 @@ public class PantallaPrincipalClienteController {
         }
 
         tablaMonederos.setItems(datos);
+        tablaMonederos.refresh();
+    }
+
+    private void cargarHistorial() {
+        configurarColumna(id, t -> t.getId());
+        configurarColumna(tipo, t -> t.getTipoTransaccion().toString());
+        configurarColumna(origen, t -> idMonedero(t.getOrigen()));
+        configurarColumna(destino, t -> idMonedero(t.getDestino()));
+        configurarColumna(comision, t -> dinero(t.getComision()));
+        configurarColumna(puntos, t -> String.valueOf(t.getPuntos()));
+        configurarColumna(estado, t -> t.isRevertida() ? "Revertida" : "OK");
+        ObservableList<Transaccion> historial = FXCollections.observableArrayList();
+        for (Transaccion transaccion : cliente.getHistorialTransacciones()) {
+            historial.add(transaccion);
+        }
+        historial.sort(Comparator.comparing(Transaccion::getFecha).reversed());
+        tablaHistorialCliente.setItems(historial);
+        tablaHistorialCliente.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
     }
 
 
@@ -443,5 +476,34 @@ public class PantallaPrincipalClienteController {
     @FXML
     void verHistorial(ActionEvent event) {
         // Pendiente
+    }
+
+    private String idMonedero(Monedero monedero) {
+        return monedero == null ? "—" : monedero.getId();
+    }
+
+    private void configurarColumna(TableColumn<Transaccion, String> columna,
+                                   Function<Transaccion, String> valor) {
+        columna.setCellValueFactory(fila -> new SimpleStringProperty(valor.apply(fila.getValue())));
+    }
+
+    @FXML private void abrirGestion() throws IOException {
+        abrirVentana("/gestionMonederos.fxml", "Gestión de monederos y programadas");
+        cargarMonederos();
+        cargarInfoCliente();
+    }
+
+    @FXML private void abrirTransacciones() throws IOException {
+        abrirVentana("/realizarTransaccion.fxml", "Realizar transacción");
+    }
+
+    private void abrirVentana(String recurso, String titulo) throws IOException {
+        Parent contenido = FXMLLoader.load(getClass().getResource(recurso));
+        Stage ventana = new Stage();
+        ventana.initOwner(tablaMonederos.getScene().getWindow());
+        ventana.initModality(javafx.stage.Modality.WINDOW_MODAL);
+        ventana.setTitle(titulo);
+        ventana.setScene(new Scene(contenido));
+        ventana.showAndWait();
     }
 }
