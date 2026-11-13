@@ -18,15 +18,17 @@ public class BinaryTree<T> {
     }
 
     /// INORDEN
-    public void inOrden() {
-        inOrden(root);
+    public LinkedList<T> inOrden() {
+        LinkedList<T> elementos = new LinkedList<>();
+        inOrden(root,elementos);
+        return elementos;
     }
 
-    private void inOrden(TreeNode<T> rootAux) {
+    private void inOrden(TreeNode<T> rootAux, LinkedList<T> elementos) {
         if (rootAux == null) return;
-        inOrden(rootAux.getLeftChild());
-        System.out.println(rootAux.getElement());
-        inOrden(rootAux.getRightChild());
+        inOrden(rootAux.getLeftChild(),elementos);
+        elementos.addLast(rootAux.getElement());
+        inOrden(rootAux.getRightChild(),elementos);
     }
 
     /// PREORDEN
@@ -235,4 +237,5 @@ public class BinaryTree<T> {
                     '}';
         }
     }
+
 }

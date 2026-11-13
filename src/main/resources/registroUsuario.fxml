@@ -1,49 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #f0f0f0; -fx-border-color: gray; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="monedero.controllers.RegistroUsuarioController">
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d1d1d1" height="406.0" layoutX="90.0" layoutY="37.0" stroke="#262121" strokeType="INSIDE" width="421.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faf8f8" height="206.0" layoutX="112.0" layoutY="113.0" stroke="#262121" strokeType="INSIDE" width="377.0" />
-      <Label layoutX="169.0" layoutY="60.0" text="REGISTRO DE CLIENTE" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
-         <font>
-            <Font name="System Bold" size="25.0" />
-         </font>
-      </Label>
-      <Button layoutX="219.0" layoutY="342.0" mnemonicParsing="false" onAction="#CrearUsuario" prefHeight="26.0" prefWidth="180.0" text="Crear Usuario" textFill="#101010" />
-      <Label fx:id="lblMensaje" layoutX="174.0" layoutY="458.0" prefHeight="18.0" prefWidth="290.0" />
-      <GridPane layoutX="141.0" layoutY="147.0" prefHeight="137.0" prefWidth="342.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.20001220703125" minWidth="10.0" prefWidth="147.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="195.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="35.799993896484374" minHeight="10.0" prefHeight="30.00001220703125" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="34.599981689453124" minHeight="10.0" prefHeight="29.600006103515625" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="41.600006103515625" minHeight="10.0" prefHeight="31.800006103515628" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="41.600006103515625" minHeight="10.0" prefHeight="31.800006103515628" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Label text="Documento Identificacion" />
-            <Label text="Contraseña" GridPane.rowIndex="2" />
-            <Label text="Nombre" GridPane.rowIndex="1" />
-            <TextField fx:id="txtIdUsuario" promptText="Ingrese Documento de Identificación" GridPane.columnIndex="1" />
-            <TextField fx:id="txtNombre" promptText="Ingrese Nombre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <PasswordField fx:id="txtPassword" promptText="Ingrese la Contraseña" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Contraseña" GridPane.rowIndex="3" />
-            <PasswordField fx:id="txtPassword2" promptText="Ingrese la Contraseña Nuevamente" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-         </children>
-      </GridPane>
-      <Button layoutX="219.0" layoutY="381.0" mnemonicParsing="false" onAction="#regresarALogin" prefHeight="26.0" prefWidth="180.0" text="Regresar a Login" textFill="#101010" />
-   </children>
-</AnchorPane>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane prefWidth="720" prefHeight="780" minWidth="440" minHeight="740" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="monedero.controllers.RegistroUsuarioController" style="-fx-background-color: #F1F5F9; -fx-font-family: 'System'; -fx-accent: #0F766E; -fx-focus-color: #0F766E; -fx-faint-focus-color: #0F766E22;">
+<children><StackPane AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"><padding><Insets top="24" right="24" bottom="24" left="24" /></padding><children>
+<VBox alignment="CENTER" spacing="24" maxWidth="390" maxHeight="-Infinity"><children>
+<VBox alignment="CENTER" spacing="6"><children><Label text="Monedero Virtual" style="-fx-font-size: 28px; -fx-text-fill: #0F172A; -fx-font-weight: bold;" /><Label text="Tu dinero y tus puntos" style="-fx-font-size: 14px; -fx-text-fill: #64748B;" /></children></VBox>
+<VBox spacing="12" style="-fx-background-color: white; -fx-background-radius: 18; -fx-effect: dropshadow(gaussian, rgba(15,23,42,0.08), 20, 0, 0, 6);"><padding><Insets top="28" right="28" bottom="28" left="28" /></padding><children><Label text="Crear cuenta" style="-fx-font-size: 26px; -fx-text-fill: #0F172A; -fx-font-weight: bold;" /><Label text="Comienza a organizar tu dinero." style="-fx-font-size: 13px; -fx-text-fill: #64748B;" /><VBox spacing="7"><children><Label text="Documento de identificación" style="-fx-font-size: 14px; -fx-text-fill: #334155;" /><TextField fx:id="txtIdUsuario" promptText="Ingresa tu documento" prefHeight="42" minHeight="42" style="-fx-font-size: 14px; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CBD5E1; -fx-padding: 10 12;" /></children></VBox><VBox spacing="7"><children><Label text="Nombre" style="-fx-font-size: 14px; -fx-text-fill: #334155;" /><TextField fx:id="txtNombre" promptText="Ingresa tu nombre" prefHeight="42" minHeight="42" style="-fx-font-size: 14px; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CBD5E1; -fx-padding: 10 12;" /></children></VBox><VBox spacing="7"><children><Label text="Contraseña" style="-fx-font-size: 14px; -fx-text-fill: #334155;" /><PasswordField fx:id="txtPassword" promptText="Crea tu contraseña" prefHeight="42" minHeight="42" style="-fx-font-size: 14px; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CBD5E1; -fx-padding: 10 12;" /></children></VBox><VBox spacing="7"><children><Label text="Confirmar contraseña" style="-fx-font-size: 14px; -fx-text-fill: #334155;" /><PasswordField fx:id="txtPassword2" promptText="Repite tu contraseña" prefHeight="42" minHeight="42" style="-fx-font-size: 14px; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CBD5E1; -fx-padding: 10 12;" /></children></VBox>
+<Label fx:id="lblMensaje" wrapText="true" minHeight="34" maxWidth="Infinity" style="-fx-font-size: 12px; -fx-text-fill: #B91C1C;" />
+<Button text="Crear usuario" onAction="#CrearUsuario" mnemonicParsing="false" maxWidth="Infinity" minHeight="44" style="-fx-background-color: #0F766E; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand; -fx-padding: 11 18;" />
+<Button text="Regresar al inicio de sesión" onAction="#regresarALogin" mnemonicParsing="false" maxWidth="Infinity" minHeight="42" style="-fx-background-color: #F0FDFA; -fx-text-fill: #0F766E; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #99F6E4; -fx-font-size: 13px; -fx-cursor: hand; -fx-padding: 11 16;" />
+</children></VBox></children></VBox></children></StackPane></children></AnchorPane>

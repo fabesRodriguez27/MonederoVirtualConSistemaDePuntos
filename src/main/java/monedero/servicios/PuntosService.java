@@ -2,6 +2,7 @@ package monedero.servicios;
 
 import monedero.comparadores.ComparadorPorPuntos;
 import monedero.estructuras.BinaryTree;
+import monedero.estructuras.LinkedList;
 import monedero.modelos.Cliente;
 import monedero.utilidades.Rango;
 
@@ -35,9 +36,7 @@ public class PuntosService {
     //REGISTRAR EN ARBOL
 
     public void registrarCliente(Cliente cliente) {
-
         cliente.setRango(calcularRango(cliente));
-
         clientesPorPuntos.insertar(cliente);
     }
 
@@ -73,8 +72,8 @@ public class PuntosService {
 
     //  RECORRIDOS inOrden
 
-    public void mostrarClientesPorPuntos() {
-        clientesPorPuntos.inOrden();
+    public LinkedList<Cliente> obtenerClientesPorPuntos() {
+        return clientesPorPuntos.inOrden();
     }
 
     // CONSULTAR TAMAÑOS
@@ -83,4 +82,7 @@ public class PuntosService {
         return clientesPorPuntos.obtenerPeso();
     }
 
+    void eliminarCliente(Cliente cliente) {
+        clientesPorPuntos.eliminar(cliente);
+    }
 }

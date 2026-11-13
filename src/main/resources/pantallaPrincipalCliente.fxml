@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -7,83 +8,24 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="482.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="monedero.controllers.PantallaPrincipalClienteController">
-   <children>
-      <Rectangle arcHeight="5.0" fill="#d0d7df" height="26.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
-      <Label layoutX="253.0" layoutY="5.0" text="Monedero Virtual" />
-      <Rectangle arcHeight="5.0" fill="#4884c4" height="71.0" layoutY="26.0" stroke="TRANSPARENT" strokeType="INSIDE" width="600.0" />
-      <Label fx:id="nombreClientelbl" layoutX="22.0" layoutY="37.0" text="Nombre del Cliente">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="22.0" layoutY="62.0" text="Id:" />
-      <Label fx:id="idClientelbl" layoutX="42.0" layoutY="62.0" text="Id del Cliente" />
-      <Button layoutX="492.0" layoutY="46.0" mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar Sesion" />
-      <Rectangle arcHeight="5.0" arcWidth="15.0" fill="#d0d7df" height="61.0" layoutX="14.0" layoutY="108.0" stroke="TRANSPARENT" strokeType="INSIDE" width="156.0" />
-      <Rectangle arcHeight="5.0" arcWidth="15.0" fill="#d0d7df" height="61.0" layoutX="222.0" layoutY="108.0" stroke="TRANSPARENT" strokeType="INSIDE" width="156.0" />
-      <Rectangle arcHeight="5.0" arcWidth="15.0" fill="#d0d7df" height="61.0" layoutX="423.0" layoutY="108.0" stroke="TRANSPARENT" strokeType="INSIDE" width="156.0" />
-      <Label layoutX="22.0" layoutY="117.0" text="Puntos Acumulados">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="puntosAcumuladoslbl" layoutX="22.0" layoutY="139.0" text="Id del Cliente" />
-      <Label layoutX="231.0" layoutY="117.0" text="Rango">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="rangoClientelbl" layoutX="231.0" layoutY="139.0" text="Rango" />
-      <Label layoutX="432.0" layoutY="117.0" text="Saldo Actual">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label fx:id="saldoClientelbl" layoutX="432.0" layoutY="139.0" text="Rango" />
-      <TabPane layoutX="13.0" layoutY="189.0" prefHeight="200.0" prefWidth="575.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Mis Monederos">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="tablaMonederos" prefHeight="200.0" prefWidth="575.0">
-                          <columns>
-                            <TableColumn fx:id="colIdMonedero" prefWidth="174.39996337890625" text="ID" />
-                            <TableColumn fx:id="colNombreMonedero" prefWidth="181.60003662109375" text="MONEDERO" />
-                              <TableColumn fx:id="colSaldoMonedero" minWidth="0.0" prefWidth="217.60002441406255" text="SALDO" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Transacciones Programadas">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView prefHeight="200.0" prefWidth="575.0">
-                          <columns>
-                            <TableColumn prefWidth="123.20001220703125" text="Próxima Ejecución" />
-                              <TableColumn prefWidth="120.0" text="Tipo" />
-                              <TableColumn prefWidth="100.79998779296875" text="Monto" />
-                              <TableColumn prefWidth="96.800048828125" text="Frecuencia" />
-                              <TableColumn minWidth="8.0" prefWidth="131.99993896484375" text="Destino" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
-      <Button layoutX="14.0" layoutY="401.0" mnemonicParsing="false" onAction="#realizarTransaccion" text="Realizar Transacción" />
-      <Button layoutX="152.0" layoutY="401.0" mnemonicParsing="false" onAction="#verBeneficios" text="Ver Beneficios" />
-      <Button layoutX="265.0" layoutY="401.0" mnemonicParsing="false" onAction="#revertirUltimaTransaccion" text="Revertir Última Transacción" />
-      <Button layoutX="15.0" layoutY="442.0" mnemonicParsing="false" onAction="#verNotificaciones" text="Ver Notificaciones" />
-      <Button layoutX="492.0" layoutY="409.0" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="34.0" prefWidth="86.0" text="Ver Historial" />
-   </children>
-</AnchorPane>
+<AnchorPane minHeight="720" minWidth="860" prefHeight="780" prefWidth="960" style="-fx-background-color: #F1F5F9; -fx-font-family: 'System'; -fx-accent: #0F766E; -fx-focus-color: #0F766E; -fx-faint-focus-color: #0F766E22;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="monedero.controllers.PantallaPrincipalClienteController">
+<children><VBox spacing="22" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"><padding><Insets bottom="28" left="28" right="28" top="28" /></padding><children>
+<HBox alignment="CENTER_LEFT" spacing="16"><children><VBox spacing="4"><children><Label style="-fx-font-size: 26px; -fx-text-fill: #0F172A; -fx-font-weight: bold;" text="Monedero Virtual" /><Label style="-fx-font-size: 13px; -fx-text-fill: #64748B;" text="Tu dinero y tus puntos" /></children></VBox><Region HBox.hgrow="ALWAYS" /><Button mnemonicParsing="false" onAction="#cerrarSesion" style="-fx-background-color: #F0FDFA; -fx-text-fill: #0F766E; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #99F6E4; -fx-font-size: 13px; -fx-cursor: hand; -fx-padding: 11 16;" text="Cerrar sesión" /></children></HBox>
+<HBox alignment="CENTER_LEFT" spacing="16" style="-fx-background-color: #0F766E; -fx-background-radius: 16;"><padding><Insets bottom="22" left="22" right="22" top="22" /></padding><children><VBox spacing="6"><children><Label style="-fx-font-size: 12px; -fx-text-fill: #CCFBF1;" text="Mi cuenta" /><Label fx:id="nombreClientelbl" style="-fx-font-size: 22px; -fx-text-fill: white; -fx-font-weight: bold;" text="Nombre del cliente" /><HBox spacing="6"><children><Label style="-fx-font-size: 13px; -fx-text-fill: #CCFBF1;" text="ID:" /><Label fx:id="idClientelbl" style="-fx-font-size: 13px; -fx-text-fill: #CCFBF1;" text="ID del cliente" /></children></HBox></children></VBox></children></HBox>
+<HBox spacing="16"><children><VBox minWidth="0" prefWidth="240" spacing="8" style="-fx-background-color: white; -fx-background-radius: 18; -fx-effect: dropshadow(gaussian, rgba(15,23,42,0.08), 20, 0, 0, 6);" HBox.hgrow="ALWAYS"><padding><Insets bottom="20" left="20" right="20" top="20" /></padding><children><Label style="-fx-font-size: 13px; -fx-text-fill: #64748B;" text="Puntos acumulados" /><Label fx:id="puntosAcumuladoslbl" style="-fx-font-size: 26px; -fx-text-fill: #0F766E; -fx-font-weight: bold;" text="0" /></children></VBox><VBox minWidth="0" prefWidth="240" spacing="8" style="-fx-background-color: white; -fx-background-radius: 18; -fx-effect: dropshadow(gaussian, rgba(15,23,42,0.08), 20, 0, 0, 6);" HBox.hgrow="ALWAYS"><padding><Insets bottom="20" left="20" right="20" top="20" /></padding><children><Label style="-fx-font-size: 13px; -fx-text-fill: #64748B;" text="Rango" /><Label fx:id="rangoClientelbl" style="-fx-font-size: 26px; -fx-text-fill: #0F766E; -fx-font-weight: bold;" text="BRONCE" /></children></VBox><VBox minWidth="0" prefWidth="240" spacing="8" style="-fx-background-color: white; -fx-background-radius: 18; -fx-effect: dropshadow(gaussian, rgba(15,23,42,0.08), 20, 0, 0, 6);" HBox.hgrow="ALWAYS"><padding><Insets bottom="20" left="20" right="20" top="20" /></padding><children><Label style="-fx-font-size: 13px; -fx-text-fill: #64748B;" text="Saldo actual" /><Label fx:id="saldoClientelbl" style="-fx-font-size: 26px; -fx-text-fill: #0F766E; -fx-font-weight: bold;" text="\$0.00" /></children></VBox></children></HBox>
+<VBox minHeight="220" spacing="14" style="-fx-background-color: white; -fx-background-radius: 18; -fx-effect: dropshadow(gaussian, rgba(15,23,42,0.08), 20, 0, 0, 6);" VBox.vgrow="ALWAYS"><padding><Insets bottom="20" left="20" right="20" top="20" /></padding><children><HBox alignment="CENTER_LEFT"><Label style="-fx-font-size: 18px; -fx-text-fill: #0F172A; -fx-font-weight: bold;" text="Mis movimientos" /><Region HBox.hgrow="ALWAYS" /><Button onAction="#abrirGestion" style="-fx-background-color: #0F766E; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 14; -fx-background-radius: 8; -fx-cursor: hand;" text="Gestionar monederos y programadas" /></HBox><TabPane minHeight="150" style="-fx-font-size: 13px;" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS"><tabs><Tab text="Historial de transacciones"><content><TableView fx:id="tablaHistorialCliente"><columns>
+<TableColumn fx:id="id" prefWidth="175" text="ID transacción" />
+<TableColumn fx:id="tipo" prefWidth="130" text="Tipo" />
+<TableColumn fx:id="origen" prefWidth="110" text="ID origen" />
+<TableColumn fx:id="destino" prefWidth="110" text="ID destino" />
+<TableColumn fx:id="comision" prefWidth="90" text="Comisión" />
+<TableColumn fx:id="puntos" prefWidth="65" text="Puntos" />
+<TableColumn fx:id="estado" prefWidth="95" text="Estado" />
+</columns><placeholder><Label text="Aún no hay transacciones en tus monederos." /></placeholder></TableView></content></Tab><Tab text="Mis monederos"><content><AnchorPane><children><TableView fx:id="tablaMonederos" style="-fx-background-color: white; -fx-border-color: #E2E8F0; -fx-border-radius: 8; -fx-font-size: 13px;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="12"><columns><TableColumn fx:id="colIdMonedero" prefWidth="240" text="ID" /><TableColumn fx:id="colNombreMonedero" prefWidth="260" text="Monedero" /><TableColumn fx:id="colSaldoMonedero" prefWidth="220" text="Saldo" /></columns></TableView></children></AnchorPane></content></Tab><Tab text="Transacciones programadas"><content><AnchorPane><children><TableView style="-fx-background-color: white; -fx-border-color: #E2E8F0; -fx-border-radius: 8; -fx-font-size: 13px;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="12"><columns><TableColumn prefWidth="200" text="Próxima ejecución" /><TableColumn prefWidth="150" text="Tipo" /><TableColumn prefWidth="130" text="Monto" /><TableColumn prefWidth="150" text="Frecuencia" /><TableColumn prefWidth="170" text="Destino" /></columns></TableView></children></AnchorPane></content></Tab></tabs></TabPane></children></VBox>
+<FlowPane hgap="12" vgap="12"><children><Button mnemonicParsing="false" onAction="#abrirTransacciones" style="-fx-background-color: #0F766E; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-size: 14px; -fx-font-weight: bold; -fx-cursor: hand; -fx-padding: 11 18;" text="Realizar transacción" /><Button mnemonicParsing="false" onAction="#verBeneficios" style="-fx-background-color: #F0FDFA; -fx-text-fill: #0F766E; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #99F6E4; -fx-font-size: 13px; -fx-cursor: hand; -fx-padding: 11 16;" text="Ver beneficios" /><Button mnemonicParsing="false" onAction="#verNotificaciones" style="-fx-background-color: #F0FDFA; -fx-text-fill: #0F766E; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #99F6E4; -fx-font-size: 13px; -fx-cursor: hand; -fx-padding: 11 16;" text="Ver notificaciones" /></children></FlowPane>
+</children></VBox></children></AnchorPane>

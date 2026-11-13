@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<VBox xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="monedero.controllers.RealizarTransaccionController" spacing="20" prefWidth="660" style="-fx-background-color: #F1F5F9; -fx-padding: 28; -fx-font-family: System;">
+    <Label text="Realizar transacción" maxWidth="Infinity" style="-fx-background-color: #0F766E; -fx-background-radius: 16; -fx-text-fill: white; -fx-padding: 18; -fx-font-size: 23px; -fx-font-weight: bold;"/>
+    <VBox spacing="12" style="-fx-padding: 18; -fx-background-color: white; -fx-background-radius: 16;">
+        <Button text="Depositar" onAction="#depositar" maxWidth="Infinity" alignment="CENTER_LEFT" style="-fx-background-color: #F0FDFA; -fx-text-fill: #115E59; -fx-padding: 12 16; -fx-border-color: #CCFBF1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-cursor: hand;"/>
+        <Button text="Retirar" onAction="#retirar" maxWidth="Infinity" alignment="CENTER_LEFT" style="-fx-background-color: #F0FDFA; -fx-text-fill: #115E59; -fx-padding: 12 16; -fx-border-color: #CCFBF1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-cursor: hand;"/>
+        <Button text="Transferir" onAction="#transferir" maxWidth="Infinity" alignment="CENTER_LEFT" style="-fx-background-color: #F0FDFA; -fx-text-fill: #115E59; -fx-padding: 12 16; -fx-border-color: #CCFBF1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-cursor: hand;"/>
+        <Button text="Revertir última transacción" onAction="#revertirUltimaTransaccion" maxWidth="Infinity" alignment="CENTER_LEFT" style="-fx-background-color: #F0FDFA; -fx-text-fill: #115E59; -fx-padding: 12 16; -fx-border-color: #CCFBF1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-cursor: hand;"/>
+    </VBox>
+    <Button text="Volver" onAction="#volver" style="-fx-background-color: #0F766E; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 14; -fx-background-radius: 8; -fx-cursor: hand;"/>
+</VBox>

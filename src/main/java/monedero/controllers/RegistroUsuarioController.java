@@ -10,8 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import monedero.application.Sistema;
-import monedero.servicios.ClienteService;
+import monedero.servicios.facade.LoginFacade;
 import monedero.utilidades.PathsFxml;
 
 public class RegistroUsuarioController {
@@ -26,7 +25,12 @@ public class RegistroUsuarioController {
     private PasswordField txtPassword;
     @FXML
     private PasswordField txtPassword2;
-    private ClienteService clienteService;
+    private LoginFacade loginFacade;
+
+    public void initialize() {
+        loginFacade = new LoginFacade();
+        limpiarCampos();
+    }
 
     @FXML
     void CrearUsuario(ActionEvent event) {
@@ -34,7 +38,7 @@ public class RegistroUsuarioController {
             if (!validarCampos()) {
                 return;
             }
-            if (clienteService.registrarCliente(txtIdUsuario.getText().trim(), txtPassword.getText().trim(), txtNombre.getText().trim())){
+            if (loginFacade.registrarCliente(txtIdUsuario.getText().trim(), txtPassword.getText().trim(), txtNombre.getText().trim())){
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
                 alerta.setTitle("Registro exitoso");
                 alerta.setHeaderText(null);
@@ -101,10 +105,5 @@ public class RegistroUsuarioController {
         txtNombre.clear();
         txtPassword.clear();
         txtPassword2.clear();
-    }
-
-    public void initialize() {
-        clienteService = Sistema.getInstancia().getClienteService();
-        limpiarCampos();
     }
 }
