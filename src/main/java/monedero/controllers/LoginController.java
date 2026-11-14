@@ -47,16 +47,18 @@ public class LoginController implements Initializable {
                 return;
             }
             Usuario usuario = loginFacade.validarIngreso(id, password);
+            if (usuario == null) {
+                mostrarError("Credenciales Inválidas. Verifique Su ID y Contraseña.");
+                inputPassword.clear();
+                inputUsername.clear();
+                return;
+            }
 
             if (usuario.getRol()== Rol.USUARIO) {
                 SessionManager.getInstancia().iniciarSesion(loginFacade.retornarCliente(usuario.getId()));
                 navegarAPantalla(event, PathsFxml.PATH_PANTALLA_PRINCIPAL_CLIENTE);
-            }else if (usuario.getRol()==Rol.ADMINISTRADOR) {
+            }else if(usuario.getRol()==Rol.ADMINISTRADOR) {
                 navegarAPantalla(event, PathsFxml.PATH_PANTALLA_PANEL_CONTROL);
-            }else{
-                mostrarError("Credenciales Inválidas. Verifique Su ID y Contraseña.");
-                inputPassword.clear();
-                inputUsername.clear();
             }
         }catch (Exception e) {
             e.printStackTrace(); //Esto hace que el error salga en la consola

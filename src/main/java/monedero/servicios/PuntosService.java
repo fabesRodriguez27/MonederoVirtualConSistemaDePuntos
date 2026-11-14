@@ -11,8 +11,7 @@ public class PuntosService {
     private final BinaryTree<Cliente> clientesPorPuntos;
 
     public PuntosService() {
-        this.clientesPorPuntos =
-                new BinaryTree<>(new ComparadorPorPuntos());
+        this.clientesPorPuntos = new BinaryTree<>(new ComparadorPorPuntos());
 
     }
 
@@ -44,30 +43,23 @@ public class PuntosService {
     public void actualizarPuntos(Cliente cliente, int variacion) {
 
         if (clientesPorPuntos.buscarNodo(cliente) == null) {
-            throw new IllegalArgumentException(
-                    "El cliente no está registrado en el árbol"
-            );
+            throw new IllegalArgumentException("El Cliente NO Está Registrado en el Árbol");
         }
 
-        int nuevosPuntos = Math.addExact(
-                cliente.getPuntos(), variacion
-        );
+        int nuevosPuntos = Math.addExact(cliente.getPuntos(), variacion);
 
         if (nuevosPuntos < 0) {
-            throw new IllegalArgumentException(
-                    "Los puntos no pueden ser negativos"
-            );
+            throw new IllegalArgumentException("Los Puntos no Pueden ser Negativos");
         }
-
-        // Eliminar de ambos árboles antes de modificar
+        // Eliminar del Árbol
         clientesPorPuntos.eliminar(cliente);
 
         // Actualizar puntos y rango
         cliente.setPuntos(nuevosPuntos);
+        cliente.setRango(calcularRango(cliente));
 
-        // Reinsertar en ambos árboles
+        // Reinsertar el Cliente
         clientesPorPuntos.insertar(cliente);
-
     }
 
     //  RECORRIDOS inOrden

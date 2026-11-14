@@ -1,10 +1,10 @@
 package monedero.modelos;
 import monedero.comparadores.ComparadorProximaEjecucion;
+import monedero.estructuras.CircularList;
 import monedero.estructuras.LinkedList;
 import monedero.estructuras.PriorityQueue;
 import monedero.estructuras.Stack;
 import monedero.utilidades.Rango;
-
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -13,11 +13,11 @@ public class Cliente {
     private String nombre;
     private int puntos;
     private Rango rango;
-
     private LinkedList<Monedero> monederos;
     private PriorityQueue<TransaccionProgramada> transaccionesProgramadas;
     private final LinkedList<Transaccion> historialTransacciones = new LinkedList<>(); // Historial de transacciones
     private final Stack<Transaccion> transaccionesReversibles = new Stack<>(); // Pila de transacciones que se pueden revertir
+    private CircularList<Notificacion> notificaciones;
 
     public Cliente(String idCliente, String nombre) {
         this.idCliente = idCliente;
@@ -28,6 +28,8 @@ public class Cliente {
         this.transaccionesProgramadas = new PriorityQueue<>(new ComparadorProximaEjecucion());
         //Monedero Principal
         this.monederos.addLast(new Monedero("Principal", 0));
+        this.notificaciones = new CircularList<>();
+
     }
 
     public String getIdCliente() {
@@ -125,6 +127,18 @@ public class Cliente {
         return transaccionesProgramadas;
     }
 
+    public Monedero buscarMonedero(String idMonedero) {
+        for (Monedero monedero : monederos) {
+            if (monedero.getId().equals(idMonedero)){
+                return monedero;
+            }
+        }
+        return null;
+    }
+
+    public Stack<Transaccion> getTransaccionesReversibles() {
+        return transaccionesReversibles;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -136,6 +150,10 @@ public class Cliente {
     @Override
     public int hashCode() {
         return Objects.hash(idCliente, nombre, puntos, rango, monederos, transaccionesProgramadas);
+    }
+
+    public CircularList<Notificacion> getNotificaciones() {
+        return notificaciones;
     }
 
 

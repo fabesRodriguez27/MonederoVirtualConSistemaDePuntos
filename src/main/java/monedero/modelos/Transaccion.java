@@ -22,7 +22,6 @@ public class Transaccion {
 
     public Transaccion (TipoTransaccion tipoTransaccion, Monedero origen, Monedero destino, double monto, Categoria categoria) {
         this.id= UUID.randomUUID().toString();
-        this.idCliente = idCliente;
         this.tipoTransaccion = tipoTransaccion;
         this.origen = origen;
         this.destino = destino;

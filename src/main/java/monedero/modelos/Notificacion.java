@@ -1,5 +1,7 @@
 package monedero.modelos;
 
+import monedero.utilidades.TipoNotificacion;
+
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -8,12 +10,14 @@ public class Notificacion {
     private String mensaje;
     private LocalDateTime fecha;
     private boolean leida;
+    private TipoNotificacion tipoNotificacion;
 
-    public Notificacion(String mensaje) {
+    public Notificacion(TipoNotificacion tipoNotificacion, String mensaje) {
         this.id = generarIdNotificacion();
-        this.mensaje = mensaje;
         this.fecha = LocalDateTime.now();
         this.leida = false;
+        this.tipoNotificacion = tipoNotificacion;
+        this.mensaje = mensaje;
     }
 
     public String getId() {
@@ -25,6 +29,10 @@ public class Notificacion {
         int numero = random.nextInt(999) + 1;
 
         return String.format("NOT%03d", numero);
+    }
+
+    public TipoNotificacion getTipoNotificacion() {
+        return this.tipoNotificacion;
     }
 
     public String getMensaje() {

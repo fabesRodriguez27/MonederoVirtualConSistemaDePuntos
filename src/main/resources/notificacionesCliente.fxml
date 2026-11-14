@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="monedero.controllers.NotificacionesController"
+      spacing="16" prefWidth="760" prefHeight="480"
+      style="-fx-background-color: #F1F5F9; -fx-padding: 28; -fx-font-family: System;">
+
+    <Label text="Mis notificaciones" maxWidth="Infinity"
+           style="-fx-background-color: #0F766E; -fx-background-radius: 16; -fx-text-fill: white; -fx-padding: 18; -fx-font-size: 23px; -fx-font-weight: bold;"/>
+
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label fx:id="lblNoLeidas" text="Sin leer: 0" style="-fx-font-size: 14px; -fx-text-fill: #0F172A;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Marcar todas como leídas" onAction="#marcarLeidas"
+                style="-fx-background-color: #F0FDFA; -fx-text-fill: #0F766E; -fx-border-color: #99F6E4; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 9 14; -fx-cursor: hand;"/>
+    </HBox>
+
+    <TableView fx:id="tablaNotificaciones" VBox.vgrow="ALWAYS" style="-fx-font-size: 13px;">
+        <columns>
+            <TableColumn fx:id="colFecha" text="Fecha" prefWidth="130"/>
+            <TableColumn fx:id="colTipo" text="Tipo" prefWidth="170"/>
+            <TableColumn fx:id="colMensaje" text="Mensaje" prefWidth="320"/>
+            <TableColumn fx:id="colEstado" text="Estado" prefWidth="80"/>
+        </columns>
+        <placeholder><Label text="No tienes notificaciones."/></placeholder>
+    </TableView>
+
+    <Button text="Volver" onAction="#volver"
+            style="-fx-background-color: #0F766E; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 14; -fx-background-radius: 8; -fx-cursor: hand;"/>
+</VBox>

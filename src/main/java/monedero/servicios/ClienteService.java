@@ -19,7 +19,7 @@ public class ClienteService {
     public Cliente buscarCliente(String idCliente) {
         Cliente c = clientes.get(idCliente);
         if (c == null) {
-            throw new IllegalArgumentException("No existe un cliente con id: " + idCliente);
+            throw new IllegalArgumentException("No Existe un Cliente con Id: " + idCliente);
         }
         return c;
     }
