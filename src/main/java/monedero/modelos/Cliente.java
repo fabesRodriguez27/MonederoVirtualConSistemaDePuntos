@@ -18,6 +18,7 @@ public class Cliente {
     private final LinkedList<Transaccion> historialTransacciones = new LinkedList<>(); // Historial de transacciones
     private final Stack<Transaccion> transaccionesReversibles = new Stack<>(); // Pila de transacciones que se pueden revertir
     private CircularList<Notificacion> notificaciones;
+    private final LinkedList<Beneficio> beneficios = new LinkedList<>();
 
     public Cliente(String idCliente, String nombre) {
         this.idCliente = idCliente;
@@ -148,6 +149,10 @@ public class Cliente {
 
     public Stack<Transaccion> getTransaccionesReversibles() {
         return transaccionesReversibles;
+    }
+
+    public LinkedList<Beneficio> getBeneficios() {
+        return beneficios;
     }
 
     @Override

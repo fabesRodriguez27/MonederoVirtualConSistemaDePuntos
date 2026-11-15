@@ -29,6 +29,10 @@ public class TransaccionService {
         return MonederoVirtual.getInstancia().getClienteService();
     }
 
+    private BeneficioService beneficios() {
+        return MonederoVirtual.getInstancia().getBeneficioService();
+    }
+
 
     public boolean depositar(String idCliente, String idMonedero, double valor) {
         validarMonto(valor);
@@ -48,16 +52,17 @@ public class TransaccionService {
         Monedero origen = obtenerMonedero(cliente, idMonedero);
         Transaccion transaccion = new Transaccion(TipoTransaccion.RETIRO, origen, null, valor, categoria);
         transaccion.setIdCliente(idCliente);
+        //Comisión según los beneficios activos del cliente
+        transaccion.setComision(beneficios().calcularComision(cliente, TipoTransaccion.RETIRO));
         //Le Sumamos al Valor del Retiro el Costo de La Comisión
         double cargo = valor + transaccion.getComision();
         if (origen.getSaldo() < cargo){
             throw new IllegalArgumentException("Saldo Insuficiente: Necesitas " + cargo + " (Monto + Comisión).");
-        }else{
-            //Modificamos el Saldo del Monedero
-            origen.setSaldo(origen.getSaldo() - cargo);
-            finalizar(cliente, transaccion);
-            return true;
         }
+        //Modificamos el Saldo del Monedero
+        origen.setSaldo(origen.getSaldo() - cargo);
+        finalizar(cliente, transaccion);
+        return true;
     }
 
     public boolean transferir(String idClienteOrigen, String idMonederoOrigen, String idClienteDestino, String idMonederoDestino, double valor, Categoria categoria) {
@@ -72,10 +77,13 @@ public class TransaccionService {
         Transaccion transaccion = new Transaccion(TipoTransaccion.TRANSFERENCIA, origen, destino, valor, categoria);
         transaccion.setIdCliente(idClienteOrigen);
         boolean interna = emisor == receptor;   // entre mis propios monederos
-        //Si la Transacción es de Para uno Mismo (Mover Dinero)
         if (interna) {
+            //Mover dinero entre mis monederos: sin comisión ni puntos
             transaccion.setComision(0);
             transaccion.setPuntos(0);
+        } else {
+            //Comisión según los beneficios activos (DESCUENTO_TRANSFERENCIA -> 10% menos)
+            transaccion.setComision(beneficios().calcularComision(emisor, TipoTransaccion.TRANSFERENCIA));
         }
         double cargo = valor + transaccion.getComision();
         if (origen.getSaldo() < cargo){

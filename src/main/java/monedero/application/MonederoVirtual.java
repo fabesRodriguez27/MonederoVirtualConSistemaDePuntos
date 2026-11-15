@@ -19,6 +19,7 @@ public class MonederoVirtual {
     private final ProgramacionService programacionService;
     private final ReporteService reporteService;
     private final TarifaService tarifaService;
+    private final BeneficioService beneficioService;
 
     private ScheduledExecutorService planificador;
 
@@ -32,6 +33,7 @@ public class MonederoVirtual {
         reporteService = new ReporteService();
         puntosService = new PuntosService();
         tarifaService = new TarifaService();
+        beneficioService = new BeneficioService();
     }
 
     public static MonederoVirtual getInstancia() {
@@ -64,6 +66,9 @@ public class MonederoVirtual {
     }
     public TarifaService getTarifaService() {
         return tarifaService;
+    }
+    public BeneficioService getBeneficioService() {    // NUEVO
+        return beneficioService;
     }
 
 

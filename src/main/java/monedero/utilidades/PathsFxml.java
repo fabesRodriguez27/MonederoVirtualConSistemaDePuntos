@@ -8,5 +8,5 @@ public class PathsFxml {
     public static final String PATH_GESTION_MONEDEROS = "/gestionMonederos.fxml";
     public static final String PATH_REALIZAR_TRANSACCION = "/realizarTransaccion.fxml";
     public static final String PATH_NOTIFICACIONES_CLIENTE = "/notificacionesCliente.fxml";
-
+    public static final String PATH_BENEFICIOS_CLIENTE = "/beneficiosCliente.fxml";
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="620" prefWidth="860" spacing="16" style="-fx-background-color: #F1F5F9; -fx-padding: 28; -fx-font-family: System;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="monedero.controllers.BeneficiosController">
+
+    <Label maxWidth="Infinity" style="-fx-background-color: #0F766E; -fx-background-radius: 16; -fx-text-fill: white; -fx-padding: 18; -fx-font-size: 23px; -fx-font-weight: bold;" text="Beneficios" />
+
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label fx:id="lblPuntos" style="-fx-font-size: 16px; -fx-text-fill: #0F766E; -fx-font-weight: bold;" text="Puntos disponibles: 0" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="btnCanjear" onAction="#canjear" style="-fx-background-color: #0F766E; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 14; -fx-background-radius: 8; -fx-cursor: hand;" text="Canjear seleccionado" />
+    </HBox>
+
+    <Label style="-fx-font-size: 15px; -fx-text-fill: #0F172A; -fx-font-weight: bold;" text="Catálogo" />
+    <TableView fx:id="tablaCatalogo" minHeight="150.0" prefHeight="150" style="-fx-font-size: 13px;">
+        <columns>
+            <TableColumn fx:id="colBeneficio" prefWidth="176.00002479553223" text="Beneficio" />
+            <TableColumn fx:id="colDescripcion" prefWidth="327.1999816894531" text="Descripción" />
+            <TableColumn fx:id="colCosto" prefWidth="144.00003051757812" text="Costo" />
+            <TableColumn fx:id="colDisponibilidad" prefWidth="157.60003662109375" text="Disponibilidad" />
+        </columns>
+    </TableView>
+
+    <Label style="-fx-font-size: 15px; -fx-text-fill: #0F172A; -fx-font-weight: bold;" text="Mis beneficios" />
+    <TableView fx:id="tablaMisBeneficios" minHeight="150.0" prefHeight="150.0" style="-fx-font-size: 13px;" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colMiBeneficio" prefWidth="210" text="Beneficio" />
+            <TableColumn fx:id="colFechaCanje" prefWidth="206.4000244140625" text="Canjeado" />
+            <TableColumn fx:id="colVencimiento" prefWidth="180.80001831054688" text="Vence" />
+            <TableColumn fx:id="colEstado" prefWidth="206.39996337890625" text="Estado" />
+        </columns>
+        <placeholder><Label text="Aún no has canjeado beneficios." /></placeholder>
+    </TableView>
+
+    <Button onAction="#volver" style="-fx-background-color: #0F766E; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 14; -fx-background-radius: 8; -fx-cursor: hand;" text="Volver" />
+</VBox>

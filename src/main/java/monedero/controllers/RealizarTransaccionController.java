@@ -10,6 +10,8 @@ import monedero.modelos.SessionManager;
 import monedero.servicios.facade.TransaccionFacade;
 import monedero.utilidades.Categoria;
 import monedero.utilidades.FormatoCedula;
+import monedero.utilidades.TipoTransaccion;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -60,10 +62,8 @@ public class RealizarTransaccionController {
             return;
         }
         //Informo de la Tarifa
-        float comision = fachada.tarifaRetiro();
-        if (!confirmar("Se Descontarán " + formatearDinero(monto + comision) + " (Monto " + formatearDinero(monto) + " + Comisión " + formatearDinero(comision) + ")")){
-            return;
-        }
+        float comision = fachada.calcularComision(cliente.getIdCliente(), TipoTransaccion.RETIRO);
+        if (!confirmar(detalleCargo(monto, comision, fachada.tarifaRetiro()))) return;
         try {
             fachada.retirar(cliente.getIdCliente(), origen.getId(), monto, categoria);
             mostrarInformacion("Retiro Realizado Correctamente.");
@@ -81,6 +81,17 @@ public class RealizarTransaccionController {
         alerta.setTitle("Confirmar Transacción");
         alerta.setHeaderText(null);
         return alerta.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK;
+    }
+
+    // Arma el texto de la confirmación, avisando si un beneficio bajó la comisión
+    private String detalleCargo(double monto, float comision, float tarifaNormal) {
+        String mensaje = "Se descontarán " + formatearDinero(monto + comision)
+                + " (monto " + formatearDinero(monto) + " + comisión " + formatearDinero(comision) + ")";
+        if (comision < tarifaNormal) {
+            mensaje += "\n\n¡Beneficio aplicado! Tarifa normal: " + formatearDinero(tarifaNormal)
+                    + ", te ahorras " + formatearDinero(tarifaNormal - comision);
+        }
+        return mensaje;
     }
 
     private Categoria pedirCategoria() {
@@ -197,16 +208,9 @@ public class RealizarTransaccionController {
         }
 
         boolean interna = idDestino.equals(cliente.getIdCliente());
-        float comision;
-        if(interna){
-            comision = 0;
-        }else{
-            comision = fachada.tarifaTransferencia();
-        }
-
-        if (!confirmar("Se Descontarán " + formatearDinero(monto + comision)
-                + " (monto " + formatearDinero(monto) + " + comisión " + formatearDinero(comision) + ").")) return;
-
+        float comision = interna ? 0 : fachada.calcularComision(cliente.getIdCliente(), TipoTransaccion.TRANSFERENCIA);
+        float tarifaNormal = interna ? 0 : fachada.tarifaTransferencia();
+        if (!confirmar(detalleCargo(monto, comision, tarifaNormal))) return;
         try {
             fachada.transferir(cliente.getIdCliente(), origen.getId(), idDestino, destino.getId(), monto, categoria);
             mostrarInformacion("Transferencia Realizada Correctamente.");

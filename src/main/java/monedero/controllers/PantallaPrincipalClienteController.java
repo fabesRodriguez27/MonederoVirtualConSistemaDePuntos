@@ -339,26 +339,16 @@ public class PantallaPrincipalClienteController {
 
     // Actualizar información cada 5 segundos
     private void iniciarActualizacionAutomatica() {
-
         if (actualizador != null) {
             actualizador.stop();
         }
-
-        actualizador = new Timeline(
-                new KeyFrame(
-                        Duration.seconds(5),
-                        event -> refrescar()
-                )
-        );
-
+        actualizador = new Timeline(new KeyFrame(Duration.seconds(5), event -> refrescar()));
         actualizador.setCycleCount(Timeline.INDEFINITE);
-
         actualizador.play();
     }
 
     // Detener actualización automática
     private void detenerActualizacionAutomatica() {
-
         if (actualizador != null) {
             actualizador.stop();
             actualizador = null;
@@ -367,16 +357,13 @@ public class PantallaPrincipalClienteController {
 
     // Refrescar información de la pantalla
     private void refrescar() {
-
         if (cliente == null) {
             return;
         }
-
         cargarInfoCliente();
         cargarMonederos();
         cargarHistorial();
         cargarProgramadas();
-
         tablaHistorialCliente.refresh();
         tablaProgramadas.refresh();
     }
@@ -435,11 +422,7 @@ public class PantallaPrincipalClienteController {
     @FXML
     private void abrirTransacciones() throws IOException {
 
-        abrirVentana(
-                PathsFxml.PATH_REALIZAR_TRANSACCION,
-                "Realizar Transacción"
-        );
-
+        abrirVentana(PathsFxml.PATH_REALIZAR_TRANSACCION, "Realizar Transacción");
         refrescar();
     }
 
@@ -447,37 +430,19 @@ public class PantallaPrincipalClienteController {
     @FXML
     private void verNotificaciones() throws IOException {
 
-        abrirVentana(
-                PathsFxml.PATH_NOTIFICACIONES_CLIENTE,
-                "Centro de Notificaciones"
-        );
-
+        abrirVentana(PathsFxml.PATH_NOTIFICACIONES_CLIENTE, "Centro de Notificaciones");
         refrescar();
     }
 
     // Abrir ventana
-    private void abrirVentana(
-            String recurso,
-            String titulo) throws IOException {
+    private void abrirVentana(String recurso, String titulo) throws IOException {
 
-        Parent contenido = FXMLLoader.load(
-                getClass().getResource(recurso)
-        );
-
+        Parent contenido = FXMLLoader.load(getClass().getResource(recurso));
         Stage ventana = new Stage();
-
-        ventana.initOwner(
-                tablaMonederos.getScene().getWindow()
-        );
-
-        ventana.initModality(
-                javafx.stage.Modality.WINDOW_MODAL
-        );
-
+        ventana.initOwner(tablaMonederos.getScene().getWindow());
+        ventana.initModality(javafx.stage.Modality.WINDOW_MODAL);
         ventana.setTitle(titulo);
-
         ventana.setScene(new Scene(contenido));
-
         ventana.showAndWait();
     }
 
@@ -510,10 +475,11 @@ public class PantallaPrincipalClienteController {
         }
     }
 
-    // Ver beneficios
+    // Abrir ventana de notificaciones
     @FXML
-    void verBeneficios(ActionEvent event) {
-        // Pendiente
+    private void verBeneficios() throws IOException {
+        abrirVentana(PathsFxml.PATH_BENEFICIOS_CLIENTE, "Mis Beneficios");
+        refrescar();
     }
 
     // Ver historial

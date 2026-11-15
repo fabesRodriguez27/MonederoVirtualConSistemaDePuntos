@@ -4,6 +4,7 @@ import monedero.estructuras.LinkedList;
 import monedero.modelos.Cliente;
 import monedero.modelos.Monedero;
 import monedero.utilidades.Categoria;
+import monedero.utilidades.TipoTransaccion;
 
 public class TransaccionFacade {
     private final MonederoVirtual monederoVirtual = MonederoVirtual.getInstancia();
@@ -38,5 +39,10 @@ public class TransaccionFacade {
 
     public boolean revertirUltimaTransaccion(String idCliente ){
         return monederoVirtual.getTransaccionService().revertirUltimaOperacion(idCliente);
+    }
+
+    public float calcularComision(String idCliente, TipoTransaccion tipo) {
+        Cliente cliente = monederoVirtual.getClienteService().buscarCliente(idCliente);
+        return monederoVirtual.getBeneficioService().calcularComision(cliente, tipo);
     }
 }
