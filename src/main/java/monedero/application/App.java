@@ -16,10 +16,28 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        // Configuración inicial del sistema
         AppSetup app = new AppSetup();
-        AnchorPane loader = FXMLLoader.load(getClass().getResource(PathsFxml.PATH_LOGIN));
+
+        // Iniciar revisión automática de transacciones programadas
+        MonederoVirtual.getInstancia().iniciarProgramaciones();
+
+        // Cargar pantalla de login
+        AnchorPane loader = FXMLLoader.load(
+                getClass().getResource(PathsFxml.PATH_LOGIN)
+        );
+
         Scene scene = new Scene(loader);
+
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    @Override
+    public void stop() {
+
+        // Detener revisión automática al cerrar la aplicación
+        MonederoVirtual.getInstancia().detenerProgramaciones();
     }
 }

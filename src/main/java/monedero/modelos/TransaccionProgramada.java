@@ -11,16 +11,20 @@ public class TransaccionProgramada extends Transaccion {
     private LocalDateTime proximaEjecucion;
     private Frecuencia frecuencia;
     private boolean estado;
+    private Cliente clienteDestino;
 
-    public TransaccionProgramada(TipoTransaccion tipoTransaccion, Monedero origen, Monedero destino, double monto, Categoria categoria, Frecuencia frecuencia) {
+    public TransaccionProgramada(TipoTransaccion tipoTransaccion, Monedero origen, Monedero destino, double monto, Categoria categoria, Frecuencia frecuencia, Cliente clienteDestino) {
         super(tipoTransaccion, origen, destino, monto, categoria);
         this.frecuencia = frecuencia;
-        this.proximaEjecucion = calcularProximaEjecucion();
         this.estado = true;
+        this.clienteDestino = clienteDestino;
+
     }
 
     public LocalDateTime calcularProximaEjecucion() {
         switch (frecuencia) {
+            case UNICA:
+                return null;
             case QUINCENAL:
                 return proximaEjecucion.plusDays(15);
 
@@ -66,5 +70,21 @@ public class TransaccionProgramada extends Transaccion {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public Cliente getClienteDestino() {
+        return clienteDestino;
+    }
+
+    public void setClienteDestino(Cliente clienteDestino) {
+        this.clienteDestino = clienteDestino;
+    }
+
+    @Override
+    public String toString() {
+        return getTipoTransaccion()
+                + " | $" + getMonto()
+                + " | " + proximaEjecucion
+                + " | " + frecuencia;
     }
 }

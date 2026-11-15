@@ -203,29 +203,6 @@ public class TransaccionService {
         return null;
     }
 
-    // Programar una transacción
-    public boolean programarTransaccion(
-            String idCliente,
-            TransaccionProgramada programada) {
-
-        return false;
-    }
-
-    // Cancelar una transacción programada
-    public boolean cancelarTransaccionProgramada(
-            String idCliente,
-            String idProgramacion) {
-
-        return false;
-    }
-
-    // Procesar transacciones programadas
-    public boolean procesarTransaccionesProgramadas(
-            LocalDateTime fecha) {
-
-        return false;
-    }
-
     // Verificar una transacción
     public boolean verificarTransaccion(Transaccion transaccion) {
         return false;
