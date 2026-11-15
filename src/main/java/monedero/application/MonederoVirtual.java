@@ -2,6 +2,11 @@ package monedero.application;
 
 import monedero.servicios.*;
 
+import java.time.LocalDateTime;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 public class MonederoVirtual {
 
     private static MonederoVirtual instancia;
@@ -14,6 +19,8 @@ public class MonederoVirtual {
     private final ProgramacionService programacionService;
     private final ReporteService reporteService;
     private final TarifaService tarifaService;
+
+    private ScheduledExecutorService planificador;
 
 
     private MonederoVirtual() {
@@ -58,4 +65,46 @@ public class MonederoVirtual {
     public TarifaService getTarifaService() {
         return tarifaService;
     }
+
+
+    /// Iniciar revisión automática de transacciones programadas
+    public void iniciarProgramaciones() {
+
+        if (planificador != null && !planificador.isShutdown()) {
+            return;
+        }
+
+        planificador = Executors.newSingleThreadScheduledExecutor();
+
+        planificador.scheduleWithFixedDelay(() -> {
+
+            try {
+
+                System.out.println(
+                        "Planificador ejecutándose: " + LocalDateTime.now()
+                );
+
+                programacionService.procesarTodasLasProgramaciones();
+
+            } catch (Exception e) {
+
+                System.err.println(
+                        "Error al procesar programaciones: " + e.getMessage()
+                );
+
+                e.printStackTrace();
+            }
+
+        }, 0, 1, TimeUnit.MINUTES);
+    }
+
+    // Detener revisión automática
+    public void detenerProgramaciones() {
+
+        if (planificador != null) {
+            planificador.shutdown();
+        }
+    }
+
+
 }

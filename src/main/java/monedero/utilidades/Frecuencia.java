@@ -1,6 +1,7 @@
 package monedero.utilidades;
 
 public enum Frecuencia {
+    UNICA,
     QUINCENAL,
     MENSUAL,
     BIMENSUAL,

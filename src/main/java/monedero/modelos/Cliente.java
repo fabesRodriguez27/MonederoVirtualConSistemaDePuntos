@@ -127,6 +127,16 @@ public class Cliente {
         return transaccionesProgramadas;
     }
 
+    public TransaccionProgramada buscarTransaccionProgramada(String idTransaccionProgramada){
+
+        for(TransaccionProgramada p : transaccionesProgramadas){
+            if(p.getId().equals(idTransaccionProgramada)){
+                return p;
+            }
+        }
+        return null;
+    }
+
     public Monedero buscarMonedero(String idMonedero) {
         for (Monedero monedero : monederos) {
             if (monedero.getId().equals(idMonedero)){

@@ -43,9 +43,8 @@ public class Monedero {
         this.saldo = saldo;
     }
 
-
     @Override
     public String toString() {
-        return nombre;
+        return nombre + " (" + id + ")";
     }
 }
