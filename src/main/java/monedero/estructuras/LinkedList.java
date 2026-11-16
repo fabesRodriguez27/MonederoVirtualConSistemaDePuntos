@@ -67,6 +67,19 @@ public class LinkedList<T> implements Iterable<T>{
         return null;
     }
 
+    public T removeFirst() {
+        if (isEmpty()) {
+            throw new java.util.NoSuchElementException("La lista está vacía");
+        }
+        T data = first.getData();
+        first = first.getNext();
+        if (first == null) {
+            last = null;
+        }
+        size--;
+        return data;
+    }
+
     public boolean remove(T data) {  /// Eliminar
         Node<T> previous = null;
         Node<T> current = first;

@@ -196,13 +196,14 @@ public class PanelControlController {
         }
     }
 
-    @FXML private void abrirInformes() {
-        Alert aviso = new Alert(Alert.AlertType.INFORMATION);
-        aviso.initOwner(tablaClientes.getScene().getWindow());
-        aviso.setTitle("Informes avanzados");
-        aviso.setHeaderText("Informes avanzados");
-        aviso.setContentText("Esta función está pendiente de implementación.");
-        aviso.showAndWait();
+    @FXML private void abrirInformes() throws IOException {
+        Parent contenido = FXMLLoader.load(getClass().getResource(PathsFxml.PATH_INFORMES_AVANZADOS));
+        Stage ventana = new Stage();
+        ventana.initOwner(tablaClientes.getScene().getWindow());
+        ventana.initModality(javafx.stage.Modality.WINDOW_MODAL);
+        ventana.setTitle("Informes avanzados");
+        ventana.setScene(new Scene(contenido));
+        ventana.showAndWait();
     }
 
     @FXML private void abrirTarifas() {

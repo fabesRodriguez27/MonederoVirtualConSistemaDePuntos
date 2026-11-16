@@ -4,6 +4,7 @@ import monedero.application.MonederoVirtual;
 import monedero.estructuras.LinkedList;
 import monedero.modelos.Cliente;
 import monedero.modelos.Monedero;
+import monedero.modelos.RelacionReporte;
 import monedero.modelos.Transaccion;
 
 public class PanelControlFacade {
@@ -38,5 +39,43 @@ public class PanelControlFacade {
     }
     public boolean actualizarTarifas(float retiro, float transferencia) {
         return monederoVirtual.getTarifaService().actualizarTarifas(retiro, transferencia);
+    }
+
+    // ===================== INFORMES (GRAFOS) =====================
+
+    public LinkedList<RelacionReporte> transferenciasEntreClientes() {
+        return monederoVirtual.getReporteService().transferenciasEntreClientes();
+    }
+
+    public LinkedList<RelacionReporte> clientesQueMasReciben() {
+        return monederoVirtual.getReporteService().clientesQueMasReciben();
+    }
+
+    public LinkedList<RelacionReporte> clientesQueMasEnvian() {
+        return monederoVirtual.getReporteService().clientesQueMasEnvian();
+    }
+
+    public LinkedList<RelacionReporte> totalesPorCategoria() {
+        return monederoVirtual.getReporteService().totalesPorCategoria();
+    }
+
+    public LinkedList<RelacionReporte> gastosPorClienteYCategoria() {
+        return monederoVirtual.getReporteService().gastosPorClienteYCategoria();
+    }
+
+    public LinkedList<RelacionReporte> movimientosEntreMonederos() {
+        return monederoVirtual.getReporteService().movimientosEntreMonederos();
+    }
+
+    public LinkedList<String> alcanceDelDinero(String idCliente) {
+        return monederoVirtual.getReporteService().alcanceDelDinero(idCliente);
+    }
+
+    public boolean hayCiclosDeTransferencias() {
+        return monederoVirtual.getReporteService().hayCiclosDeTransferencias();
+    }
+
+    public String resumenGrafoTransferencias() {
+        return monederoVirtual.getReporteService().resumenGrafoTransferencias();
     }
 }

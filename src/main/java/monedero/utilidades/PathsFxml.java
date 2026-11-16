@@ -9,4 +9,5 @@ public class PathsFxml {
     public static final String PATH_REALIZAR_TRANSACCION = "/realizarTransaccion.fxml";
     public static final String PATH_NOTIFICACIONES_CLIENTE = "/notificacionesCliente.fxml";
     public static final String PATH_BENEFICIOS_CLIENTE = "/beneficiosCliente.fxml";
+    public static final String PATH_INFORMES_AVANZADOS = "/informesAvanzados.fxml";
 }

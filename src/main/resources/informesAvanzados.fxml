@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="monedero.controllers.InformesController"
+      spacing="16" prefWidth="960" prefHeight="640"
+      style="-fx-background-color: #F1F5F9; -fx-padding: 28; -fx-font-family: System;">
+
+    <Label text="Informes avanzados" maxWidth="Infinity"
+           style="-fx-background-color: #0F766E; -fx-background-radius: 16; -fx-text-fill: white; -fx-padding: 18; -fx-font-size: 23px; -fx-font-weight: bold;"/>
+
+    <TabPane VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE" style="-fx-font-size: 13px;">
+        <tabs>
+            <Tab text="Transferencias entre clientes">
+                <content>
+                    <VBox spacing="10" style="-fx-padding: 14;">
+                        <Label fx:id="lblResumen" style="-fx-font-weight: bold; -fx-text-fill: #0F172A;"/>
+                        <Label fx:id="lblCiclos" wrapText="true" style="-fx-text-fill: #0F766E;"/>
+                        <TableView fx:id="tablaTransferencias" minHeight="150" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </content>
+            </Tab>
+
+            <Tab text="Quién recibe y quién envía">
+                <content>
+                    <HBox spacing="14" style="-fx-padding: 14;">
+                        <VBox spacing="8" HBox.hgrow="ALWAYS">
+                            <Label text="Clientes que más reciben (grado de entrada)" style="-fx-font-weight: bold;"/>
+                            <TableView fx:id="tablaReceptores" minHeight="150" VBox.vgrow="ALWAYS"/>
+                        </VBox>
+                        <VBox spacing="8" HBox.hgrow="ALWAYS">
+                            <Label text="Clientes que más envían (grado de salida)" style="-fx-font-weight: bold;"/>
+                            <TableView fx:id="tablaEmisores" minHeight="150" VBox.vgrow="ALWAYS"/>
+                        </VBox>
+                    </HBox>
+                </content>
+            </Tab>
+
+            <Tab text="Patrones de gasto">
+                <content>
+                    <VBox spacing="8" style="-fx-padding: 14;">
+                        <Label text="Total por categoría" style="-fx-font-weight: bold;"/>
+                        <TableView fx:id="tablaCategorias" minHeight="150" prefHeight="190"/>
+                        <Label text="Gasto de cada cliente por categoría" style="-fx-font-weight: bold;"/>
+                        <TableView fx:id="tablaGastosCliente" minHeight="150" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </content>
+            </Tab>
+
+            <Tab text="Entre monederos">
+                <content>
+                    <VBox spacing="8" style="-fx-padding: 14;">
+                        <Label text="Dinero movido de un monedero a otro" style="-fx-font-weight: bold;"/>
+                        <TableView fx:id="tablaMonederos" minHeight="150" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </content>
+            </Tab>
+
+            <Tab text="Alcance del dinero">
+                <content>
+                    <VBox spacing="10" style="-fx-padding: 14;">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <ComboBox fx:id="comboClienteAlcance" prefWidth="320" promptText="Selecciona un cliente"/>
+                            <Button text="Analizar" onAction="#analizarAlcance"
+                                    style="-fx-background-color: #0F766E; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 14; -fx-background-radius: 8; -fx-cursor: hand;"/>
+                        </HBox>
+                        <Label fx:id="lblAlcance" wrapText="true"/>
+                        <ListView fx:id="listaAlcance" minHeight="150" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </content>
+            </Tab>
+        </tabs>
+    </TabPane>
+
+    <Button text="Volver" onAction="#volver"
+            style="-fx-background-color: #0F766E; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 14; -fx-background-radius: 8; -fx-cursor: hand;"/>
+</VBox>
